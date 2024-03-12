@@ -180,6 +180,71 @@ console.log("Balance:", account1._balance);
 
 Cohesion refers to the degree to which elements within a module or class are related and contribute to a single, well-defined purpose. High cohesion indicates that the elements within the class are closely related and focused on achieving a specific task.
 
+`Example of great use`
+```typescript
+class Car {
+  make: string;
+  model: string;
+  year: number;
+  speed: number;
+
+  constructor(make: string, model: string, year: number) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.speed = 0;
+  }
+
+  accelerate(): void {
+    this.speed += 10;
+    console.log(`Accelerating. Current speed: ${this.speed} km/h`);
+  }
+
+  brake(): void {
+    this.speed -= 10;
+    console.log(`Braking. Current speed: ${this.speed} km/h`);
+  }
+
+  turn(direction: string): void {
+    console.log(`Turning ${direction}`);
+  }
+}
+
+
+const myCar = new Car("Toyota", "Camry", 2020);
+myCar.accelerate();
+myCar.brake();
+myCar.turn("left");
+```
+The Car class encapsulates data (make, model, year, speed) and behaviors (accelerate, brake, turn) related to a car. 
+This encapsulation helps in achieving high cohesion because all the properties and methods are closely related to the concept of a car.
+<br>
+
+`Example of bad use`
+```typescript
+class LowCohesion {
+  constructor() {}
+
+  stringManipulation(text: string): string {
+    return text.toUpperCase();
+  }
+
+  randomBoolean(): boolean {
+    return Math.random() < 0.5;
+  }
+
+  addNums(num1: number, num2: number): number {
+    return num1 + num2;
+  }
+}
+
+const utils = new LowCohesion();
+console.log(utils.stringManipulation("hello"));
+console.log(utils.randomBoolean());
+console.log(utils.addNums(5, 3));
+```
+The functionalities in this code are unrelated, resulting in low cohesion, making the code difficult to maintain and understand.
+
 <br>
 
 **4.Coupling**
