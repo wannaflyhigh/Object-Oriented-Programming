@@ -40,21 +40,46 @@ console.log(myDog.speak());
 
 `Example of bad use`
 ```javascript
-class Car {
-      constructor(make, model, engineType) {
-            this.make = make;
-            this.model = model;
-            this.engineType = engineType;
+class Shape {
+      constructor(type, sides) {
+            this.type = type;
+            this.sides = sides;
       }
 
-      getEngineDetails() {
-            return `Engine type: ${this.engineType}`;
+      calculatePerimeter() {
+            throw new Error('This method must be implemented in subclass');
       }
 }
 
-const myCar = new Car('Toyota', 'Corolla', 'Gasoline');
-console.log(myCar.getEngineDetails()); // Output: Engine type: Gasoline
+class Rectangle extends Shape {
+      constructor(length, width) {
+            super('rectangle', 4);
+            this.length = length;
+            this.width = width;
+      }
+
+      calculatePerimeter() {
+            return 2 * (this.length + this.width);
+      }
+}
+
+class Circle extends Shape {
+      constructor(radius) {
+            super('circle', Infinity); 
+            this.radius = radius;
+      }       
+
+      calculatePerimeter() {
+            return 2 * Math.PI * this.radius;
+      }
+}
+
+const rectangle = new Rectangle(5, 3);
+const circle = new Circle(4);
+console.log(rectangle.calculatePerimeter()); 
+console.log(circle.calculatePerimeter());    
 ```
+In the Circle subclass, the sides property is set to Infinity, which is not meaningful for a circle. This violates the abstraction principle because it introduces unnecessary confusion and complexity.
 
 <br>
 
