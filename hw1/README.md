@@ -39,6 +39,22 @@ console.log(myDog.speak());
 ```
 
 `Example of bad use`
+```javascript
+class Car {
+  constructor(make, model, engineType) {
+    this.make = make;
+    this.model = model;
+    this.engineType = engineType;
+  }
+  
+  getEngineDetails() {
+    return `Engine type: ${this.engineType}`;
+  }
+}
+
+const myCar = new Car('Toyota', 'Corolla', 'Gasoline');
+console.log(myCar.getEngineDetails()); // Output: Engine type: Gasoline
+```
 
 <br>
 
