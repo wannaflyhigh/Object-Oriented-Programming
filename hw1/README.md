@@ -20,17 +20,17 @@ Abstraction refers to the process of simplifying complex reality by modeling cla
 ```javascript
 class Animal {
       constructor(name) {
-        this.name = name;
+            this.name = name;
       }
       
       speak() {
-        throw new Error('This method must be implemented in subclass');
+            throw new Error('This method must be implemented in subclass');
       }
 }
 
 class Dog extends Animal {
       speak() {
-        return `${this.name} says woof!`;
+            return `${this.name} says woof!`;
       }
 }
 
@@ -41,15 +41,15 @@ console.log(myDog.speak());
 `Example of bad use`
 ```javascript
 class Car {
-  constructor(make, model, engineType) {
-    this.make = make;
-    this.model = model;
-    this.engineType = engineType;
-  }
-  
-  getEngineDetails() {
-    return `Engine type: ${this.engineType}`;
-  }
+      constructor(make, model, engineType) {
+            this.make = make;
+            this.model = model;
+            this.engineType = engineType;
+      }
+
+      getEngineDetails() {
+            return `Engine type: ${this.engineType}`;
+      }
 }
 
 const myCar = new Car('Toyota', 'Corolla', 'Gasoline');
@@ -88,19 +88,19 @@ Coupling refers to the degree of interdependence between modules (classes), and 
 ```javascript
 class PaymentProcessor {
       processPayment(amount) {
-        console.log(`Processing payment of ${amount} dollars`);
+            console.log(`Processing payment of ${amount} dollars`);
       }
 }
 
 class ShoppingCart {
       constructor(paymentProcessor) {
-        this.paymentProcessor = paymentProcessor;
+            this.paymentProcessor = paymentProcessor;
       }
       
       checkout(totalAmount) {
-        console.log('Starting checkout process...');
-        this.paymentProcessor.processPayment(totalAmount);
-        console.log('Checkout completed!');
+            console.log('Starting checkout process...');
+            this.paymentProcessor.processPayment(totalAmount);
+            console.log('Checkout completed!');
       }
 }
 
