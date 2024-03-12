@@ -71,6 +71,30 @@ Coupling refers to the degree of interdependence between modules (classes), and 
 
 `Exemple of great use`
 
+```bash
+class PaymentProcessor {
+      processPayment(amount) {
+        console.log(`Processing payment of ${amount} dollars`);
+      }
+}
+
+class ShoppingCart {
+      constructor(paymentProcessor) {
+            this.paymentProcessor = paymentProcessor;
+      }
+      
+      checkout(totalAmount) {
+        console.log('Starting checkout process...');
+        this.paymentProcessor.processPayment(totalAmount);
+        console.log('Checkout completed!');
+      }
+}
+
+const paymentProcessor = new PaymentProcessor();
+const myShoppingCart = new ShoppingCart(paymentProcessor);
+myShoppingCart.checkout(1000); 
+```
+
 `Exemple of bad use`
 
 <br>
