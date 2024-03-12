@@ -21,11 +21,11 @@ Abstraction refers to the process of simplifying complex reality by modeling cla
 ```bash
 class Animal {
       constructor(name) {
-            this.name = name;
+        this.name = name;
       }
       
       speak() {
-            throw new Error('This method must be implemented in subclass');
+        throw new Error('This method must be implemented in subclass');
       }
 }
 
@@ -80,7 +80,7 @@ class PaymentProcessor {
 
 class ShoppingCart {
       constructor(paymentProcessor) {
-            this.paymentProcessor = paymentProcessor;
+        this.paymentProcessor = paymentProcessor;
       }
       
       checkout(totalAmount) {
