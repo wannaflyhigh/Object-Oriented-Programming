@@ -18,6 +18,27 @@ Abstraction refers to the process of simplifying complex reality by modeling cla
 
 `Exemple of great use`
 
+```bash
+class Animal {
+      constructor(name) {
+        this.name = name;
+      }
+      
+      speak() {
+        throw new Error('This method must be implemented in subclass');
+      }
+    }
+
+    class Dog extends Animal {
+      speak() {
+        return `${this.name} says woof!`;
+      }
+    }
+
+    const myDog = new Dog('Puppy');
+    console.log(myDog.speak());
+```
+
 `Exemple of bad use`
 
 <br>
