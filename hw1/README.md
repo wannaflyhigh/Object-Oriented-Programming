@@ -214,5 +214,23 @@ myShoppingCart.checkout(1000);
 ```
 
 `Example of bad use`
+```javascript
+class PaymentProcessor {
+      processPayment(totalAmount) {
+            console.log(`Processing payment for $${totalAmount}`);
+      }
+}
+
+class ShoppingCart {
+      checkout() {
+            const paymentProcessor = new PaymentProcessor();
+            paymentProcessor.processPayment(100); 
+      }
+}
+
+const myShoppingCart = new ShoppingCart();
+myShoppingCart.checkout();
+```
+In this example, the ShoppingCart class directly instantiates the PaymentProcessor class within its checkout() method. This creates a hardcoded dependency, tightly coupling the ShoppingCart class to a specific implementation of the PaymentProcessor. 
 
 <br>
