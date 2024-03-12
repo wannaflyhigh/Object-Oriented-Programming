@@ -16,7 +16,7 @@ ts-node file-name.ts
 
 Abstraction refers to the process of simplifying complex reality by modeling classes based on their essential characteristics, hiding unnecessary details.
 
-`Exemple of great use`
+`Example of great use`
 ```javascript
 class Animal {
       constructor(name) {
@@ -38,7 +38,7 @@ const myDog = new Dog('Puppy');
 console.log(myDog.speak());
 ```
 
-`Exemple of bad use`
+`Example of bad use`
 
 <br>
 
@@ -48,13 +48,13 @@ console.log(myDog.speak());
 
 Encapsulation is the bundling of data and methods that operate on the data into a single unit or class. It hides the internal state of an object and only exposes the necessary functionalities through methods.
 
-`Exemple of great use`
+`Example of great use`
 
-`Exemple of bad use`
+`Example of bad use`
 
 <br>
 
-**3.Encapsulation**
+**3.Cohesion**
 
 `definition` 
 
@@ -68,7 +68,7 @@ Cohesion refers to the degree to which elements within a module or class are rel
 
 Coupling refers to the degree of interdependence between modules (classes), and it measures how much one class relies on another class.
 
-`Exemple of great use`
+`Example of great use`
 ```javascript
 class PaymentProcessor {
       processPayment(amount) {
@@ -93,6 +93,6 @@ const myShoppingCart = new ShoppingCart(paymentProcessor);
 myShoppingCart.checkout(1000); 
 ```
 
-`Exemple of bad use`
+`Example of bad use`
 
 <br>
