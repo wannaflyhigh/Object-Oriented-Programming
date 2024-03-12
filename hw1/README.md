@@ -18,7 +18,7 @@ Abstraction refers to the process of simplifying complex reality by modeling cla
 
 `Exemple of great use`
 
-```bash
+```javascript
 class Animal {
       constructor(name) {
         this.name = name;
@@ -71,7 +71,7 @@ Coupling refers to the degree of interdependence between modules (classes), and 
 
 `Exemple of great use`
 
-```bash
+```javascript
 class PaymentProcessor {
       processPayment(amount) {
         console.log(`Processing payment of ${amount} dollars`);
