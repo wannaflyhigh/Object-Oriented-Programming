@@ -17,7 +17,7 @@ ts-node file-name.ts
 Abstraction refers to the process of simplifying complex reality by modeling classes based on their essential characteristics, hiding unnecessary details.
 
 `Example of great use`
-```javascript
+```typescript
 class Animal {
       constructor(name) {
             this.name = name;
@@ -39,7 +39,7 @@ console.log(myDog.speak());
 ```
 
 `Example of bad use`
-```javascript
+```typescript
 class Shape {
       constructor(type, sides) {
             this.type = type;
@@ -189,7 +189,7 @@ Cohesion refers to the degree to which elements within a module or class are rel
 Coupling refers to the degree of interdependence between modules (classes), and it measures how much one class relies on another class.
 
 `Example of great use`
-```javascript
+```typescript
 class PaymentProcessor {
       processPayment(amount) {
             console.log(`Processing payment of ${amount} dollars`);
@@ -214,7 +214,7 @@ myShoppingCart.checkout(1000);
 ```
 
 `Example of bad use`
-```javascript
+```typescript
 class PaymentProcessor {
       processPayment(totalAmount) {
             console.log(`Processing payment for $${totalAmount}`);
