@@ -12,6 +12,14 @@ ts-node file-name.ts
 ## 第一題
 **1.Abstraction**
 
+`definition` 
+
+Abstraction refers to the process of simplifying complex reality by modeling classes based on their essential characteristics, hiding unnecessary details.
+
+`Exemple of great use`
+
+`Exemple of bad use`
+
 <br>
 
 **2.Encapsulation**
@@ -34,6 +42,14 @@ Cohesion refers to the degree to which elements within a module or class are rel
 
 <br>
 
-**4.Encapsulation**
+**4.Coupling**
+
+`definition` 
+
+Coupling refers to the degree of interdependence between modules (classes), and it measures how much one class relies on another class.
+
+`Exemple of great use`
+
+`Exemple of bad use`
 
 <br>
