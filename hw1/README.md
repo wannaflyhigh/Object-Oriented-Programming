@@ -127,7 +127,7 @@ account1.withdraw(200);
 console.log("Current balance:", account1.getBalance());
 ```
 In TypeScript, through directly specify members as private, making them truly inaccessible from outside the class. <br>
-Accessing private variable will compilation error.
+Accessing private variable will "compilation error".
 <br>
 
 `Example of bad use`
