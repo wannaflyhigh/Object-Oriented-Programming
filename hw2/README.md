@@ -24,6 +24,6 @@ Name or their UniversityId. Faculty members can be the adviser of zero or more S
 
 ![./1c.png](./1c.png)
 
-## 2
+## Question 2
 
 This would break abstraction and seriously degrade the code maintainability. Once developer wants to use getArea() with all shapes, it can't work correctly with Square, and Shape is no longer obey polymorphism.
