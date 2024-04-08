@@ -1,10 +1,6 @@
 # 作業二
 
-## 操作說明
 
-```bash
-python3 hw3.a.py
-```
 
 ## Question 1
 
@@ -31,6 +27,12 @@ This would break abstraction and seriously degrade the code maintainability. Onc
 ## Question 3
 
 ### (a)
+
+### 操作說明
+
+```bash
+python3 hw3.a.py
+```
 
 ```python
 class Animal:
