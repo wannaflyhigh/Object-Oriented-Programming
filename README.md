@@ -1,5 +1,11 @@
 # Object-Oriented-Programming
 
-## 目錄
+## Homework Submission
 
-- [作業一](./hw1/)
+### Homework 1
+- [x] Done
+- [HW1 Submission](./hw1/)
+
+### Homework 2
+- [ ] Done
+- [HW2 Submission](./hw2/)
