@@ -1,0 +1,15 @@
+@startuml 1a
+
+class A
+class B
+interface C
+class D
+class E
+
+B <|-- A
+C <|.. A: "implement"
+C <-- D
+A <-- D
+E "1..*" -->  B
+
+@enduml
