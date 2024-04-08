@@ -168,6 +168,3 @@ cat.makeNoise()
 cat.play()
 cat.takeForWalk()
 ```
-```bash
-python3 hw3.a.py
-```
