@@ -1,0 +1,12 @@
+@startuml
+class CargoPlane
+class Part
+class Pallet
+class Box
+class Item
+
+CargoPlane *-- Part
+Part o-- Box
+Box *-- Item
+Pallet *-- Box
+@enduml

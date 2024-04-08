@@ -1,0 +1,40 @@
+@startuml
+class University {
+    - units: Unit[]
+}
+
+class Unit {
+    - faculty: Faculty[]
+    - students: Student[]
+    - staff: Staff[]
+    - addressBook: AddressBook
+}
+
+class AddressBook {
+    - entries: Entry[]
+}
+
+class Entry {
+    - lastName: String
+    - universityId: String
+}
+
+class Faculty {
+    - advisorOf: Student[]
+}
+
+class Student {
+    - advisor: Faculty
+}
+
+class Staff {
+}
+
+University "1" *-- "1..*" Unit
+Unit "1" *-- "*" Faculty
+Unit "1" *-- "*" Student
+Unit "1" *-- "*" Staff
+Unit "1" *-- "1" AddressBook
+AddressBook "1" *-- "*" Entry
+Faculty "0..*" -- "0..*" Student
+@enduml
