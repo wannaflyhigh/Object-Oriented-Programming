@@ -28,12 +28,6 @@ This would break abstraction and seriously degrade the code maintainability. Onc
 
 ### (a)
 
-### 操作說明
-
-```bash
-python3 hw3.a.py
-```
-
 ```python
 class Animal:
     def __init__(self, name):
@@ -83,5 +77,9 @@ cat = Cat("mimi")
 cat.play()
 cat.takeForWalk()
 ```
+```bash
+python3 hw3.a.py
+```
+
 
 ### (b)
