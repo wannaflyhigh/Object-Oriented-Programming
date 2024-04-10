@@ -1,6 +1,8 @@
 @startuml 1a
 
-class A
+class A{
+	useC()
+}
 class B
 interface C{
 	useC()
