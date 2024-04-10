@@ -13,15 +13,14 @@ class Box {
     List<Item> items
 }
 
-class Part {
-    String partNumber
-}
+class Part
 
 class Item
+note Right of Item :Access by part number
 
-CargoPlane "0..*" --> "0..*" Pallet : contains
-Pallet "0..*" --> "0..*" Box : contains
-CargoPlane "1..*" --> "1..*" Part : composedOf
-Box "1" --> "0..*" Item : contains
+CargoPlane "1" --o "0..*" Pallet : aggregation
+Pallet "1" --o "0..*" Box : aggregation
+CargoPlane "1" --* "1..*" Part : compose
+Box "1" --* "1..*" Item : contains
 
 @enduml
