@@ -1,40 +1,39 @@
 @startuml
+
 class University {
-    - units: Unit[]
+    List<Unit> units
 }
 
 class Unit {
-    - faculty: Faculty[]
-    - students: Student[]
-    - staff: Staff[]
-    - addressBook: AddressBook
-}
-
-class AddressBook {
-    - entries: Entry[]
-}
-
-class Entry {
-    - lastName: String
-    - universityId: String
+    List<Faculty> faculties
+    List<Student> students
+    List<Staff> staffs
+    AddressBook addressBook
 }
 
 class Faculty {
-    - advisorOf: Student[]
+    List<Student> advisees
 }
 
-class Student {
-    - advisor: Faculty
+class Student
+
+class Staff
+
+class AddressBook {
+    List<Entry> entries
 }
 
-class Staff {
+class Entry {
+    String lastName
+    String universityId
 }
 
-University "1" *-- "1..*" Unit
-Unit "1" *-- "*" Faculty
-Unit "1" *-- "*" Student
-Unit "1" *-- "*" Staff
-Unit "1" *-- "1" AddressBook
-AddressBook "1" *-- "*" Entry
-Faculty "0..*" -- "0..*" Student
+University "1" --> "1..*" Unit : is composed of
+Unit "1" --> "0..*" Faculty : contains
+Unit "1" --> "0..*" Student : contains
+Unit "1" --> "0..*" Staff : contains
+Unit "1" --> "1" AddressBook : maintains
+AddressBook "1" --> "1" Entry : has
+Faculty "0..*" --> "0..*" Student : advises
+
 @enduml
