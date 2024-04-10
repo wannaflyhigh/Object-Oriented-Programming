@@ -2,14 +2,19 @@
 
 class A
 class B
-interface C
-class D
+interface C{
+	useC()
+}
+class D{
+	A someA
+	AccessA()
+}
+note right of D :AccessA(){\n	someA.useC()\n}
 class E
 
 B <|-- A
-C <|.. A: "implement"
-C <-- D
+C <|.. A
 A <-- D
-E "1..*" -->  B
+B <-- "1..*" E 
 
 @enduml
