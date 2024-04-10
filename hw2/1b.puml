@@ -1,12 +1,27 @@
 @startuml
-class CargoPlane
-class Part
-class Pallet
-class Box
+
+class CargoPlane {
+    List<Pallet> pallets
+    List<Part> parts
+}
+
+class Pallet {
+    List<Box> boxes
+}
+
+class Box {
+    List<Item> items
+}
+
+class Part {
+    String partNumber
+}
+
 class Item
 
-CargoPlane *-- Part
-Part o-- Box
-Box *-- Item
-Pallet *-- Box
+CargoPlane "0..*" --> "0..*" Pallet : contains
+Pallet "0..*" --> "0..*" Box : contains
+CargoPlane "1..*" --> "1..*" Part : composedOf
+Box "1" --> "0..*" Item : contains
+
 @enduml
