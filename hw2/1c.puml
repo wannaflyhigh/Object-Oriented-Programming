@@ -28,12 +28,13 @@ class Entry {
     String universityId
 }
 
-University "1" --> "1..*" Unit : is composed of
-Unit "1" --> "0..*" Faculty : contains
-Unit "1" --> "0..*" Student : contains
-Unit "1" --> "0..*" Staff : contains
+University "1" --* "1..*" Unit : composed
+Unit "1" --> "*" Faculty : contains
+Unit "1" --> "*" Student : contains
+Unit "1" --> "*" Staff : contains
 Unit "1" --> "1" AddressBook : maintains
-AddressBook "1" --> "1" Entry : has
-Faculty "0..*" --> "0..*" Student : advises
+AddressBook "*" <--> "*" Entry
+Entry "1" --> "*" Unit
+Faculty "1" --> "0..*" Student : adviser
 
 @enduml
