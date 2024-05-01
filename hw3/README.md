@@ -148,4 +148,4 @@ export function randomInt(floor: number, ceil: number): number {
 ```
 
 ## Question 2
-![Class Diagram](hw3/classDiagram.png)
+![Class Diagram](https://github.com/wannaflyhigh/Object-Oriented-Programming/blob/main/hw3/classDiagram.png)
