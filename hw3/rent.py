@@ -22,11 +22,13 @@ class VideoRentalStore:
         self.customers = []
         self.rentals = []
 
+    def create_catalog(self):
         categories = ["New Release", "Drama", "Comedy", "Romance", "Horror"]
         for i in range(20):
             video = Video(f"Video {i+1}", random.choice(categories))
             self.catalog.append(video)
 
+    def create_customers(self):
         for i in range(10):
             name = f"Customer {i+1}"
             customer_type = random.choice(["Breezy", "Hoarder", "Regular"])
@@ -50,11 +52,14 @@ class VideoRentalStore:
             for rental in self.rentals:
                 rental.duration -= 1
                 if rental.duration == 0:
-                    self.rentals.remove(rental)
-                    for video in rental.videos:
-                        self.catalog.append(video)
+                    self.return_videos(rental)
                     income += rental.duration * len(rental.videos)
         return income
+
+    def return_videos(self, rental):
+        self.rentals.remove(rental)
+        for video in rental.videos:
+            self.catalog.append(video)
 
     def report(self):
         print("Videos currently in store:")
@@ -73,4 +78,6 @@ class VideoRentalStore:
             print(f"{rental.customer.name} rented {', '.join([video.name for video in rental.videos])} for {rental.duration} days")
 
 store = VideoRentalStore()
+store.create_catalog()
+store.create_customers()
 store.report()
