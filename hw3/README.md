@@ -148,4 +148,13 @@ export function randomInt(floor: number, ceil: number): number {
 ```
 
 ## Question 2
+
+### 1.UML class diagram
 ![Class Diagram](./classDiagram.png)
+
+### 2.程式編譯與運行方法
+```bash
+
+```
+
+### 3.程式說明
