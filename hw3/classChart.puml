@@ -1,0 +1,50 @@
+@startuml hw3
+
+class Store{
+	Video[] videos
+	Rental[] rentals
+	int money
+	createVideos()
+	trackRental()
+	updatePrice()
+}
+
+class Video{
+	string categories
+	int price
+}
+
+Store <|-- "20" Video : owns
+
+note Right of Video : Categories including New Release, Drama, \nComedy, Romance, and Horror
+
+class Customer{
+	string name
+	string type
+	Video[] videos
+	int duration
+	rent()
+	return()
+}
+note left of Customer::rent
+A giant rent function for types
+end note
+
+note left of Customer::return
+retrun all at a time
+end note
+
+Customer <|-- "0..3" Video : rent
+Store <|-- "10" Customer
+
+class Rental{
+	int nightsRemains
+	Video[] videos
+	Customer customer
+	bool hasReturned
+}
+Store <|-- Rental
+Rental <|-- Video
+
+
+@enduml
