@@ -27,8 +27,8 @@ note left of Customer::return
 retrun all at a time
 end note
 
-Customer <|-- "0..3" Video : rent
-Store <|-- "10" Customer
+Customer <-- "0..3" Video : rent
+Store <-- "10" Customer
 
 
 class Video{
@@ -37,7 +37,7 @@ class Video{
 	int price
 }
 
-Store <|-- "20" Video : owns
+Store <-- "20" Video : owns
 
 note Right of Video : Categories including New Release, Drama, \nComedy, Romance, and Horror
 
@@ -50,6 +50,6 @@ class Rental{
 
 note Right of Rental : Customers are allowed to rent a video for up to 7 nights
 
-Store <|-- Rental
-Rental <|-- Video
+Store <-- Rental
+Rental <-- Video
 @enduml
