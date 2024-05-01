@@ -146,3 +146,6 @@ export function randomInt(floor: number, ceil: number): number {
 }
 
 ```
+
+## Question 2
+![Class Diagram](classDiagram.png)
