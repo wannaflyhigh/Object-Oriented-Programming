@@ -3,29 +3,22 @@
 class Store{
 	Video[] videos
 	Rental[] rentals
+	Customer[] customer
 	int money
 	createVideos()
-	trackRental()
+	createCustomers()
 	updatePrice()
+	trackRentals()
 }
-
-class Video{
-	string categories
-	int price
-}
-
-Store <|-- "20" Video : owns
-
-note Right of Video : Categories including New Release, Drama, \nComedy, Romance, and Horror
 
 class Customer{
 	string name
 	string type
 	Video[] videos
-	int duration
 	rent()
 	return()
 }
+
 note left of Customer::rent
 A giant rent function for types
 end note
@@ -37,14 +30,26 @@ end note
 Customer <|-- "0..3" Video : rent
 Store <|-- "10" Customer
 
+
+class Video{
+	string name
+	string categories
+	int price
+}
+
+Store <|-- "20" Video : owns
+
+note Right of Video : Categories including New Release, Drama, \nComedy, Romance, and Horror
+
 class Rental{
-	int nightsRemains
+	int expireDay
 	Video[] videos
 	Customer customer
 	bool hasReturned
 }
+
+note Right of Rental : Customers are allowed to rent a video for up to 7 nights
+
 Store <|-- Rental
 Rental <|-- Video
-
-
 @enduml
