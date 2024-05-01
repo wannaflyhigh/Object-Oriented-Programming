@@ -7,5 +7,9 @@
 - [HW1 Submission](./hw1/)
 
 ### Homework 2
-- [ ] Done
+- [x] Done
 - [HW2 Submission](./hw2/)
+
+### Homework 3
+- [ ] Done
+- [HW3 Submission](./hw3/)
