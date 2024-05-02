@@ -9,6 +9,10 @@ class Store{
 	createCustomers()
 	updatePrice()
 	trackRentals()
+	getVideos()
+    getRentals()
+    getCustomers()
+    getMoney()
 }
 
 class Customer{
@@ -17,6 +21,9 @@ class Customer{
 	Video[] videos
 	rent()
 	return()
+	getName()
+	getype()
+	getVideos()
 }
 
 note left of Customer::rent
@@ -35,6 +42,10 @@ class Video{
 	string name
 	string categories
 	int price
+	getName()
+    getCategories()
+    getPrice()
+    setPrice()
 }
 
 Store <-- "20" Video : owns
@@ -46,6 +57,14 @@ class Rental{
 	Video[] videos
 	Customer customer
 	bool hasReturned
+	int moneyEarned
+	getExpireDay()
+    getRentDay()
+    getVideos()
+    getCustomer()
+    getHasReturned()
+    getMoneyEarned()
+	setHasReturned()
 }
 
 note Right of Rental : Customers are allowed to rent a video for up to 7 nights
