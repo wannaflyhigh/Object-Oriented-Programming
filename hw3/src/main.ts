@@ -6,9 +6,9 @@ const store = new Store()
 
 for (let day = 1; day <= 35; day++) {
 	store.trackRentals(day)
-	if (store.videos.length === 0) continue
-	const visitableCustomers: Customer[] = store.customer.filter((customer) => {
-		if (store.videos.length < 3 && customer.type === CUSTOMER_TYPES[1])
+	if (store.getVideos().length === 0) continue
+	const visitableCustomers: Customer[] = store.getCustomers().filter((customer) => {
+		if (store.getVideos().length < 3 && customer.getType() === CUSTOMER_TYPES[1])
 			return false
 		return true
 	})
@@ -19,20 +19,20 @@ for (let day = 1; day <= 35; day++) {
 }
 
 console.log(`Videos currently in Store:`)
-store.videos.forEach((video) => {
-	console.log(`	${video.name}`)
+store.getVideos().forEach((video) => {
+	console.log(`	${video.getName()}`)
 })
 
 console.log(`Total money earned:`)
-console.log(`	${store.money}.`)
+console.log(`	${store.getMoney()}.`)
 
 console.log(`Rentals:`)
-store.rentals.forEach((rental) => {
+store.getRentals().forEach((rental) => {
 	console.log(
-		`	Video named: ${rental.videos.map((video) => video.name)} rented by: ${
-			rental.customer.name
-		}, rented from ${rental.rentDay} to ${rental.expireDay},  money paid: ${
-			rental.moneyEarned
-		} Competion: ${rental.hasReturned ? "Yes" : "Not yet"}`
+		`	Video named: ${rental.getVideos().map((video) => video.getName())} rented by: ${
+			rental.getCustomer().getName()
+		}, rented from ${rental.getRentDay()} to ${rental.getExpireDay()},  money paid: ${
+			rental.getMoneyEarned()
+		} Competion: ${rental.getHasReturned() ? "Yes" : "Not yet"}`
 	)
 })

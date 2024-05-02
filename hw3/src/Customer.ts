@@ -11,9 +11,9 @@ export const customerTypeToMinRent = new Map([
 ])
 
 export class Customer {
-	name: string
-	type: string
-	videos: Video[] = []
+	private name: string
+	private type: string
+	private videos: Video[] = []
 	constructor(name: string, type: string) {
 		this.name = name
 		this.type = type
@@ -24,30 +24,42 @@ export class Customer {
 		let moneyToPay = 0
 		for (let i = 0; i < rentCount; i++) {
 			const videoToRent: Video =
-				store.videos[randomInt(0, store.videos.length - 1)]
-			moneyToPay += videoToRent.price
+				store.getVideos()[randomInt(0, store.getVideos().length - 1)]
+			moneyToPay += videoToRent.getPrice()
 			this.videos.push(videoToRent)
-			store.videos = store.videos.filter((video) => video != videoToRent)
+			store["videos"] = store.getVideos().filter((video) => video != videoToRent)
 		}
 		const rental = new Rental(day + nights, day, this.videos, this, moneyToPay)
-		store.rentals.push(rental)
-		store.money += moneyToPay
+		store["rentals"].push(rental)
+		store["money"] += moneyToPay
 	}
 
 	return(store: Store) {
 		this.videos.forEach((video) => {
-			store.videos.push(video)
+			store.getVideos().push(video)
 		})
 		this.videos = []
 	}
+
+	getName(): string {
+        return this.name
+    }
+
+    getType(): string {
+        return this.type
+    }
+
+    getVideos(): Video[] {
+        return this.videos
+    }
 }
 
 function customerTypeToRentCountAndNights(customer: Customer, store: Store) {
 	let rentCount: number = -1,
 		nights: number = -1
-	switch (customer.type) {
+	switch (customer.getType()) {
 		case CUSTOMER_TYPES[0]:
-			rentCount = store.videos.length >= 2 ? randomInt(1, 2) : 1
+			rentCount = store.getVideos().length >= 2 ? randomInt(1, 2) : 1
 			nights = randomInt(1, 2)
 			return { rentCount, nights }
 
@@ -58,9 +70,9 @@ function customerTypeToRentCountAndNights(customer: Customer, store: Store) {
 
 		case CUSTOMER_TYPES[2]:
 			rentCount =
-				store.videos.length >= 3
+				store.getVideos().length >= 3
 					? randomInt(1, 3)
-					: randomInt(1, store.videos.length)
+					: randomInt(1, store.getVideos().length)
 			nights = randomInt(3, 5)
 			return { rentCount, nights }
 	}
