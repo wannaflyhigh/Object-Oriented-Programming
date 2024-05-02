@@ -27,11 +27,11 @@ export class Customer {
 				store.getVideos()[randomInt(0, store.getVideos().length - 1)]
 			moneyToPay += videoToRent.getPrice()
 			this.videos.push(videoToRent)
-			store["videos"] = store.getVideos().filter((video) => video != videoToRent)
+			store.setVideos(store.getVideos().filter((video) => video != videoToRent))
 		}
 		const rental = new Rental(day + nights, day, this.videos, this, moneyToPay)
-		store["rentals"].push(rental)
-		store["money"] += moneyToPay
+		store.addRental(rental)
+		store.payMoney(moneyToPay)
 	}
 
 	return(store: Store) {
@@ -42,16 +42,16 @@ export class Customer {
 	}
 
 	getName(): string {
-        return this.name
-    }
+		return this.name
+	}
 
-    getType(): string {
-        return this.type
-    }
+	getType(): string {
+		return this.type
+	}
 
-    getVideos(): Video[] {
-        return this.videos
-    }
+	getVideos(): Video[] {
+		return this.videos
+	}
 }
 
 function customerTypeToRentCountAndNights(customer: Customer, store: Store) {

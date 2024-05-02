@@ -36,14 +36,14 @@ export class Store {
 	}
 
 	private updatePrice() {
-        const mapCategoriesToPrice = new Map(
-            VIDEO_CATEGORIES.map((category) => [category, randomInt(1, 10)])
-        )
-        this.videos = this.videos.map((video) => {
-            video.setPrice(mapCategoriesToPrice.get(video.getCategories()) || 0)
-            return video
-        })
-    }
+		const mapCategoriesToPrice = new Map(
+			VIDEO_CATEGORIES.map((category) => [category, randomInt(1, 10)])
+		)
+		this.videos = this.videos.map((video) => {
+			video.setPrice(mapCategoriesToPrice.get(video.getCategories()) || 0)
+			return video
+		})
+	}
 
 	trackRentals(day: number) {
 		this.rentals.forEach((rental) => {
@@ -56,19 +56,30 @@ export class Store {
 	}
 
 	getVideos(): Video[] {
-        return this.videos
-    }
+		return this.videos
+	}
 
-    getRentals(): Rental[] {
-        return this.rentals
-    }
+	getRentals(): Rental[] {
+		return this.rentals
+	}
 
-    getCustomers(): Customer[] {
-        return this.customer
-    }
+	getCustomers(): Customer[] {
+		return this.customer
+	}
 
-    getMoney(): number {
-        return this.money
-    }
-	
+	getMoney(): number {
+		return this.money
+	}
+
+	addRental(newRental: Rental) {
+		this.rentals.push(newRental)
+	}
+
+	payMoney(moneyToPay: number) {
+		this.money += moneyToPay
+	}
+
+	setVideos(videos: Video[]) {
+		this.videos = videos
+	}
 }
