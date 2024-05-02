@@ -36,7 +36,8 @@
 
 ### 2.程式編譯與運行方法
 ```bash
-
+cd hw3
+ts-node .\src\main.ts
 ```
 
 ### 3.程式說明
