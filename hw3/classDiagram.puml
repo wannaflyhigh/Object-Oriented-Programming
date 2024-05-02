@@ -13,6 +13,9 @@ class Store{
     getRentals()
     getCustomers()
     getMoney()
+	addRental()
+	payMoney()
+	setVideos()
 }
 
 class Customer{
