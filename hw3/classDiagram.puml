@@ -54,6 +54,7 @@ note Right of Video : Categories including New Release, Drama, \nComedy, Romance
 
 class Rental{
 	int expireDay
+	int rentDay
 	Video[] videos
 	Customer customer
 	bool hasReturned
