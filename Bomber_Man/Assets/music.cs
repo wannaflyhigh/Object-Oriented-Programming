@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class music : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public AudioSource audioSource;
+    public AudioClip connectSound;
+    public AudioClip collisionSound;
+
+    private void Start()
     {
-        Debug.Log("start");
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("updating");
+        if (collision.gameObject.CompareTag("WaterBall"))
+        {
+            audioSource.PlayOneShot(collisionSound);
+        }
     }
+
+    private void OnWaterBallMeet()
+    {
+        audioSource.PlayOneShot(connectSound);
+    }
+
 }
