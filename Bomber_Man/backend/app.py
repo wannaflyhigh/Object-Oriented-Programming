@@ -32,6 +32,22 @@ async def register(user: User):
         raise HTTPException(status_code=500, detail=f"Error registering user: {str(e)}")
     finally:
         cursor.close()
+@app.post("/login/")
+async def login(user: User):
+    cursor = db.cursor()
+    try:
+        query = "SELECT hashed_password FROM user_info WHERE player_account = %s"
+        cursor.execute(query, (user.user_account,))
+        result = cursor.fetchone()
+        if result:
+            hashed_password = result[0]
+            if bcrypt.checkpw(user.user_password.encode('utf-8'), hashed_password.encode('utf-8')):
+                return {"message": "Login successful"}
+        raise HTTPException(status_code=401, detail="Invalid username or password")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error logging in: {str(e)}")
+    finally:
+        cursor.close()
 
 if __name__ == "__main__":
     import uvicorn
