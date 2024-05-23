@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration and Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h1>User Registration</h1>
+    <form id="registerForm">
+        <label for="account">Account:</label><br>
+        <input type="text" id="account" name="player_account" required><br>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="player_password" required><br><br>
+        <input type="submit" value="Register">
+    </form>
+
+    <hr>
+
+    <h1>User Login</h1>
+    <form id="loginForm">
+        <label for="loginAccount">Account:</label><br>
+        <input type="text" id="loginAccount" name="player_account" required><br>
+        <label for="loginPassword">Password:</label><br>
+        <input type="password" id="loginPassword" name="player_password" required><br><br>
+        <input type="submit" value="Login">
+    </form>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var formData = new FormData(this); // Get form data
+            var jsonData = {};
+            formData.forEach((value, key) => jsonData[key] = value);
+            axios.post('http://localhost:8080/register/', jsonData)
+                .then(function(response) {
+                    alert(response.data.message); // Show the response message
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            var formData = new FormData(this); // Get form data
+            var jsonData = {};
+            formData.forEach((value, key) => jsonData[key] = value);
+            axios.post('http://localhost:8080/login/', jsonData)
+                .then(function(response) {
+                    alert(response.data.message); // Show the response message
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        });
+    </script>
+</body>
+</html>
