@@ -1,5 +1,5 @@
-export default class ImageHandler {
-	imagePaths = ['../images/grass.png']
+class ImageHandler {
+	imagePaths = ['../images/grass.png', '../images/stone.png']
 	loadedImages
 
 	loadImages() {
@@ -8,3 +8,5 @@ export default class ImageHandler {
 		})
 	}
 }
+
+export default new ImageHandler()

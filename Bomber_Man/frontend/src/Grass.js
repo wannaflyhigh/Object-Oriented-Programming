@@ -1,7 +1,9 @@
+import ImageHandler from "./ImageHandler";
+
 export default class Grass {
 	image
-	setImage(image) {
-		this.image = image
+	constructor() {
+		this.image = ImageHandler.loadedImages[0]
 	}
 
 	display() {
