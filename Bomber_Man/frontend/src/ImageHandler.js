@@ -10,3 +10,5 @@ class ImageHandler {
 }
 
 export default new ImageHandler()
+
+export const imageKeys = { GRASS: 0, STONE: 1 }
