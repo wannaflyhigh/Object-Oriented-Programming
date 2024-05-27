@@ -6,7 +6,7 @@ export default class Grass {
 		this.image = ImageHandler.loadedImages[0]
 	}
 
-	display() {
-		image(this.image, 0, 0);
+	display(x, y) {
+		image(this.image, x, y);
 	}
 }
