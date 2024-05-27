@@ -1,10 +1,10 @@
 export default class Grass {
-	a 
-	setup() {
-		this.a = loadImage('../images/grass.png');
+	image
+	setImage(image) {
+		this.image = image
 	}
 
 	display() {
-		image(this.a, 0, 0);
+		image(this.image, 0, 0);
 	}
 }
