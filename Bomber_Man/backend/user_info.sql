@@ -1,5 +1,6 @@
-CREATE TABLE bombman_db.user_info (
-    player_account VARCHAR(255) NOT NULL,
-    hashed_password VARCHAR(255) NOT NULL,
-    coin_amount INT
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    account VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    coin INT DEFAULT 0
 );
