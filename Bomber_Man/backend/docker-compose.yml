@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: a12345
+      MYSQL_DATABASE: bombman_db
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./user_info.sql:/docker-entrypoint-initdb.d/user_info.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: >
+      sh -c "
+      /usr/local/bin/docker-entrypoint.sh mysqld &
+      pid=\$!;
+      echo 'Waiting for MySQL to be ready...';
+      while ! mysqladmin ping -hlocalhost --silent; do sleep 1; done;
+      mysql -u root -pa12345 bombman_db < /docker-entrypoint-initdb.d/user_info.sql;
+      wait \$pid
+      "
+
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+      until mysql -h db -u root -pa12345 -e 'select 1' &> /dev/null; do
+        echo 'Waiting for MySQL to be ready...'
+        sleep 10
+      done;
+      echo 'MySQL is ready';
+      python app.py"
+
+volumes:
+  db_data:

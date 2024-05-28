@@ -1,3 +1,1 @@
-mysql直接執行sql檔案產生資料表
-pip install fastapi[all]
-uvicorn app:app --port 8080 --reload
+docker-compose up --build
