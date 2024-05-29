@@ -1,7 +1,10 @@
-import { Grass, Stone } from "./Items"
+import { Grass, Stone } from "./Items";
+import Character from "./Items/Character";
 
 export default class BomberManMap {
-	items = new Map()
+	items = new Map();
+
+
 	initMap() {
 		for (let i = 0; i < 11; i++) {
 			for (let j = 0; j < 11; j++) {
@@ -11,11 +14,19 @@ export default class BomberManMap {
 					this.items.set({ x: i, y: j }, new Grass())
 			}
 		}
+
 	}
+
+
 	display() {
 		this.items.forEach((value, key) => {
 			value.display(key.x * 100, key.y * 100)
 		})
 	}
+
 	updateItem(x, y) { }
+
+	moveCharacter(dx, dy) {
+		this.character.move(dx, dy, this);
+	}
 }
