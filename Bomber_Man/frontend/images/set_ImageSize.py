@@ -7,7 +7,7 @@ def resize_image(input_path, output_path, size=(100, 100)):
         img.save(output_path)
         print(f"save sucessful {output_path}")
 
-input_image_path = 'fire.png'
-output_image_path = 'fire.png'
+input_image_path = 'grass2.png'
+output_image_path = 'grass2.png'
 
 resize_image(input_image_path, output_image_path)
