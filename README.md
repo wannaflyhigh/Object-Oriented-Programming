@@ -11,5 +11,5 @@
 - [HW2 Submission](./hw2/)
 
 ### Homework 3
-- [ ] Done
+- [x] Done
 - [HW3 Submission](./hw3/)

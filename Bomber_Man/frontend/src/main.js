@@ -4,7 +4,7 @@ import ImageHandler from './ImageHandler';
 import BomberManMap from './BomberManMap';
 import Character from "./Items/Character";
 
-const bomberManMap = new BomberManMap()
+const bomberManMap = BomberManMap
 let character;
 const keyStates = {
 	up: false,
@@ -31,18 +31,18 @@ sketch.draw = function () {
 	character.draw()
 
 	let dx = 0, dy = 0;
-  	if (keyStates.up) dy = -1;
-  	else if (keyStates.down) dy = 1;
-  	if (keyStates.left) dx = -1;
-  	else if (keyStates.right) dx = 1;
-	
+	if (keyStates.up) dy = -1;
+	else if (keyStates.down) dy = 1;
+	if (keyStates.left) dx = -1;
+	else if (keyStates.right) dx = 1;
+
 	character.move(dx, dy);
 }
 
 sketch.mousePressed = function () {
 	console.log('here');
 	console.log({ mouseX, mouseY });
-	// NOTE:
+	// NOTE: full screen while playing?
 	// if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
 	// 	let fs = fullscreen();
 	// 	fullscreen(!fs);
@@ -51,27 +51,30 @@ sketch.mousePressed = function () {
 
 function keyPressed() {
 	if (key === 'w') {
-	  keyStates.up = true;
+		keyStates.up = true;
 	} else if (key === 's') {
-	  keyStates.down = true;
+		keyStates.down = true;
 	} else if (key === 'a') {
-	  keyStates.left = true;
+		keyStates.left = true;
 	} else if (key === 'd') {
-	  keyStates.right = true;
+		keyStates.right = true;
 	}
-  }
-  
-  function keyReleased() {
+	else if (key === 'o') {
+		character.layBomb()
+	}
+}
+
+function keyReleased() {
 	if (key === 'w') {
-	  keyStates.up = false;
+		keyStates.up = false;
 	} else if (key === 's') {
-	  keyStates.down = false;
+		keyStates.down = false;
 	} else if (key === 'a') {
-	  keyStates.left = false;
+		keyStates.left = false;
 	} else if (key === 'd') {
-	  keyStates.right = false;
+		keyStates.right = false;
 	}
-  }
+}
 
 window.keyPressed = keyPressed; // To ensure keyPressed can be accessed by p5.js
 window.keyReleased = keyReleased;
