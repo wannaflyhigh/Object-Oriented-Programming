@@ -4,7 +4,7 @@ import ImageHandler from './ImageHandler';
 import BomberManMap from './BomberManMap';
 import Character from "./Items/Character";
 
-const bomberManMap = new BomberManMap()
+const bomberManMap = BomberManMap
 let character;
 const keyStates = {
 	up: false,
@@ -42,7 +42,7 @@ sketch.draw = function () {
 sketch.mousePressed = function () {
 	console.log('here');
 	console.log({ mouseX, mouseY });
-	// NOTE:
+	// NOTE: full screen while playing?
 	// if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
 	// 	let fs = fullscreen();
 	// 	fullscreen(!fs);
@@ -58,6 +58,9 @@ function keyPressed() {
 		keyStates.left = true;
 	} else if (key === 'd') {
 		keyStates.right = true;
+	}
+	else if (key === 'o') {
+		character.layBomb()
 	}
 }
 

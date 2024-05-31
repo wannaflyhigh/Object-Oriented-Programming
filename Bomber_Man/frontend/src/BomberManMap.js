@@ -2,9 +2,8 @@ import { Brick, Grass, Stone } from "./Items";
 import Character from "./Items/Character";
 const MAP_WIDTH = 11, MAP_HEIGHT = 11
 
-export default class BomberManMap {
+class BomberManMap {
 	items = new Map();
-
 
 	initMap() {
 		for (let i = 0; i < MAP_HEIGHT; i++) {
@@ -18,9 +17,7 @@ export default class BomberManMap {
 				this.items.set({ x: i, y: j }, Math.random() > 0.5 ? new Grass() : new Brick())
 			}
 		}
-
 	}
-
 
 	display() {
 		this.items.forEach((value, key) => {
@@ -28,9 +25,14 @@ export default class BomberManMap {
 		})
 	}
 
-	updateItem(x, y) { }
+	updateItem(x, y, newItem) {
+		this.items.delete({ x, y })
+		this.items.set({ x, y }, newItem)
+	}
 
 	moveCharacter(dx, dy) {
 		this.character.move(dx, dy, this);
 	}
 }
+
+export default new BomberManMap()

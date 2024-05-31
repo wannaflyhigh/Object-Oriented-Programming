@@ -1,4 +1,6 @@
+import BomberManMap from "../BomberManMap";
 import { imageKeys } from "../ImageHandler";
+import Bomb from "./Bomb";
 import Item from "./Item";
 
 export default class Character extends Item {
@@ -15,23 +17,22 @@ export default class Character extends Item {
 		this.x = 1;
 		this.y = 1;
 		this.targetX = this.x;
-    	this.targetY = this.y;
+		this.targetY = this.y;
 		this.positionX = 1;
 		this.positionY = 1;
 	}
-	
-	
+
 	move(dx, dy) {
 		let newX = this.x + dx;
 		let newY = this.y + dy;
-		console.log(this.positionX,this.positionY);
+		console.log(this.positionX, this.positionY);
 
 		newX = Math.max(1, Math.min(newX, 9));
-  		newY = Math.max(1, Math.min(newY, 9));
+		newY = Math.max(1, Math.min(newY, 9));
 
 		this.targetX = newX;
 		this.targetY = newY;
-	
+
 		/*
 		// 檢查新位置是否是草地
 		const key = { x: newX, y: newY };;
@@ -52,9 +53,13 @@ export default class Character extends Item {
 		this.y = lerp(this.y, this.targetY, this.moveSpeed);
 
 		this.positionX = Math.round(this.x);
-    	this.positionY = Math.round(this.y);
-	  
+		this.positionY = Math.round(this.y);
+
 		// 繪製角色
 		image(this.image, this.x * 100, this.y * 100);
-	  }
+	}
+
+	layBomb() {
+		BomberManMap.updateItem(this.positionX, this.positionY, new Bomb(this.positionX, this.positionY))
+	}
 }
