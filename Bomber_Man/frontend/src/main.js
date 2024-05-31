@@ -2,6 +2,16 @@ import '../css/style.css';
 import { sketch } from 'p5js-wrapper';
 import ImageHandler from './ImageHandler';
 import BomberManMap from './BomberManMap';
+import Character from "./Items/Character";
+
+const bomberManMap = BomberManMap
+let character;
+const keyStates = {
+	up: false,
+	down: false,
+	left: false,
+	right: false
+};
 
 sketch.preload = function () {
 	console.log("hi")
@@ -10,20 +20,87 @@ sketch.preload = function () {
 sketch.setup = function () {
 	createCanvas(1920, 1080);
 	ImageHandler.loadImages()
+	bomberManMap.initMap()
+	character = new Character()
 }
 
 sketch.draw = function () {
 	background(100);
 	scale(0.4);
-	(new BomberManMap).display()
+	bomberManMap.display()
+	character.draw()
+
+	let dx = 0, dy = 0;
+
+	if (keyStates.up) {
+		dx = 0;
+		dy = -1;
+	} else if (keyStates.down) {
+		dx = 0;
+		dy = 1;
+	} else if (keyStates.left) {
+		dx = -1;
+		dy = 0;
+	} else if (keyStates.right) {
+		dx = 1;
+		dy = 0;
+	}
+
+	/*if (keyStates.up) dy = -1;
+	else if (keyStates.down) dy = 1;
+	if (keyStates.left) dx = -1;
+	else if (keyStates.right) dx = 1;*/
+
+	character.move(dx, dy);
 }
 
 sketch.mousePressed = function () {
 	console.log('here');
 	console.log({ mouseX, mouseY });
-	// NOTE:
+	// NOTE: full screen while playing?
 	// if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
 	// 	let fs = fullscreen();
 	// 	fullscreen(!fs);
 	// }
 }
+
+function keyPressed() {
+	if (key === 'w') {
+		resetKeyStates();
+		keyStates.up = true;
+	} else if (key === 's') {
+		resetKeyStates();
+		keyStates.down = true;
+	} else if (key === 'a') {
+		resetKeyStates();
+		keyStates.left = true;
+	} else if (key === 'd') {
+		resetKeyStates();
+		keyStates.right = true;
+	}
+	else if (key === 'o') {
+		character.layBomb()
+	}
+}
+
+function keyReleased() {
+	if (key === 'w') {
+		keyStates.up = false;
+	} else if (key === 's') {
+		keyStates.down = false;
+	} else if (key === 'a') {
+		keyStates.left = false;
+	} else if (key === 'd') {
+		keyStates.right = false;
+	}
+}
+
+function resetKeyStates() {
+	keyStates.up = false;
+	keyStates.down = false;
+	keyStates.left = false;
+	keyStates.right = false;
+}
+
+window.keyPressed = keyPressed; // To ensure keyPressed can be accessed by p5.js
+window.keyReleased = keyReleased;
