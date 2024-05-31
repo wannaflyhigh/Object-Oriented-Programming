@@ -47,14 +47,12 @@ export default class Character extends Item {
 	}
 
 	draw() {
-		// 平滑移動到目標位置
 		this.x = lerp(this.x, this.targetX, this.moveSpeed);
 		this.y = lerp(this.y, this.targetY, this.moveSpeed);
 
 		this.positionX = Math.round(this.x);
     	this.positionY = Math.round(this.y);
 	  
-		// 繪製角色
 		image(this.image, this.x * 100, this.y * 100);
 	  }
 }
