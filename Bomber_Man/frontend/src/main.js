@@ -31,10 +31,25 @@ sketch.draw = function () {
 	character.draw()
 
 	let dx = 0, dy = 0;
-	if (keyStates.up) dy = -1;
+
+	if (keyStates.up) {
+		dx = 0;
+		dy = -1;
+	} else if (keyStates.down) {
+		dx = 0;
+		dy = 1;
+	} else if (keyStates.left) {
+		dx = -1;
+		dy = 0;
+	} else if (keyStates.right) {
+		dx = 1;
+		dy = 0;
+	}
+
+	/*if (keyStates.up) dy = -1;
 	else if (keyStates.down) dy = 1;
 	if (keyStates.left) dx = -1;
-	else if (keyStates.right) dx = 1;
+	else if (keyStates.right) dx = 1;*/
 
 	character.move(dx, dy);
 }
@@ -51,12 +66,16 @@ sketch.mousePressed = function () {
 
 function keyPressed() {
 	if (key === 'w') {
+		resetKeyStates();
 		keyStates.up = true;
 	} else if (key === 's') {
+		resetKeyStates();
 		keyStates.down = true;
 	} else if (key === 'a') {
+		resetKeyStates();
 		keyStates.left = true;
 	} else if (key === 'd') {
+		resetKeyStates();
 		keyStates.right = true;
 	}
 	else if (key === 'o') {
@@ -74,6 +93,13 @@ function keyReleased() {
 	} else if (key === 'd') {
 		keyStates.right = false;
 	}
+}
+
+function resetKeyStates() {
+	keyStates.up = false;
+	keyStates.down = false;
+	keyStates.left = false;
+	keyStates.right = false;
 }
 
 window.keyPressed = keyPressed; // To ensure keyPressed can be accessed by p5.js

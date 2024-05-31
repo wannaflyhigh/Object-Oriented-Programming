@@ -33,6 +33,11 @@ class BomberManMap {
 	moveCharacter(dx, dy) {
 		this.character.move(dx, dy, this);
 	}
+
+	/*checkObject(x, y) {
+        const item = this.items.get(`${x},${y}`);
+        return item instanceof Grass;
+    }*/
 }
 
 export default new BomberManMap()

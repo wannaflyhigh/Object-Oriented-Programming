@@ -10,7 +10,7 @@ export default class Character extends Item {
 	positionY;
 	targetX;
 	targetY;
-	moveSpeed = 0.05;
+	moveSpeed = 3;
 
 	constructor() {
 		super(imageKeys.CHARACTER)
@@ -31,30 +31,40 @@ export default class Character extends Item {
 		newY = Math.max(1, Math.min(newY, 9));
 
 		this.targetX = newX;
-		this.targetY = newY;
+        this.targetY = newY;
 
-		/*
-		// 檢查新位置是否是草地
-		const key = { x: newX, y: newY };;
-		console.log("key",key);
-		const item = map.items.get(key);
-		console.log("item",item);
-		if (item && item.constructor.name === 'Grass') {
-			this.x = newX;
-			this.y = newY;
-			console.log("newPosition",this.x,this.y)
-			this.display(this.x *100, this.y*100)
-		}*/
+		/*if (BomberManMap.checkObject(newX, newY)) {
+            this.targetX = newX;
+            this.targetY = newY;
+        }*/
 	}
 
 	draw() {
-		this.x = lerp(this.x, this.targetX, this.moveSpeed);
-		this.y = lerp(this.y, this.targetY, this.moveSpeed);
 
-		this.positionX = Math.round(this.x);
-    	this.positionY = Math.round(this.y);
-	  
-		image(this.image, this.x * 100, this.y * 100);
+        const distanceX = this.targetX - this.x;
+        const distanceY = this.targetY - this.y;
+
+		//if diagonal movement is allowed
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        if (distance < 0.01) {
+            this.x = this.targetX;
+            this.y = this.targetY;
+        } else {
+            const moveX = (distanceX / distance) * this.moveSpeed / 60;
+            const moveY = (distanceY / distance) * this.moveSpeed / 60;
+
+            this.x += moveX;
+            this.y += moveY;
+        }
+
+        this.x = Math.max(1, Math.min(this.x, 9));
+        this.y = Math.max(1, Math.min(this.y, 9));
+
+        this.positionX = Math.round(this.x);
+        this.positionY = Math.round(this.y);
+
+        image(this.image, this.x * 100, this.y * 100);
 	}
 
 	layBomb() {
