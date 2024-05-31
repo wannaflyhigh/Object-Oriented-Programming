@@ -3,31 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration and Login</title>
+    <title>爆爆王遊戲 - User Registration and Login</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: #007bff;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #666;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h1>User Registration</h1>
-    <form id="registerForm">
-        <label for="account">Account:</label><br>
-        <input type="text" id="account" name="player_account" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="player_password" required><br><br>
-        <input type="submit" value="Register">
-    </form>
+    <div class="container">
+        <h1>爆爆王遊戲</h1>
+        <button class="btn" id="openRegisterBtn">註冊</button>
+        <button class="btn" id="openLoginBtn">登入</button>
+    </div>
 
-    <hr>
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeRegisterBtn">&times;</span>
+            <h2>註冊</h2>
+            <form id="registerForm">
+                <label for="account">帳號:</label>
+                <input type="text" id="account" name="player_account" required>
+                <label for="password">密碼:</label>
+                <input type="password" id="password" name="player_password" required>
+                <input type="submit" value="註冊">
+            </form>
+        </div>
+    </div>
 
-    <h1>User Login</h1>
-    <form id="loginForm">
-        <label for="loginAccount">Account:</label><br>
-        <input type="text" id="loginAccount" name="player_account" required><br>
-        <label for="loginPassword">Password:</label><br>
-        <input type="password" id="loginPassword" name="player_password" required><br><br>
-        <input type="submit" value="Login">
-    </form>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeLoginBtn">&times;</span>
+            <h2>登入</h2>
+            <form id="loginForm">
+                <label for="loginAccount">帳號:</label>
+                <input type="text" id="loginAccount" name="player_account" required>
+                <label for="loginPassword">密碼:</label>
+                <input type="password" id="loginPassword" name="player_password" required>
+                <input type="submit" value="登入">
+            </form>
+        </div>
+    </div>
 
     <script>
+        // Get modals and buttons
+        var registerModal = document.getElementById('registerModal');
+        var loginModal = document.getElementById('loginModal');
+        var openRegisterBtn = document.getElementById('openRegisterBtn');
+        var openLoginBtn = document.getElementById('openLoginBtn');
+        var closeRegisterBtn = document.getElementById('closeRegisterBtn');
+        var closeLoginBtn = document.getElementById('closeLoginBtn');
+
+        // Open modals
+        openRegisterBtn.onclick = function() {
+            registerModal.style.display = 'flex';
+        }
+        openLoginBtn.onclick = function() {
+            loginModal.style.display = 'flex';
+        }
+
+        // Close modals
+        closeRegisterBtn.onclick = function() {
+            registerModal.style.display = 'none';
+        }
+        closeLoginBtn.onclick = function() {
+            loginModal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == registerModal) {
+                registerModal.style.display = 'none';
+            }
+            if (event.target == loginModal) {
+                loginModal.style.display = 'none';
+            }
+        }
+
+        // Form submission
         document.getElementById('registerForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
             var formData = new FormData(this); // Get form data
@@ -36,6 +186,7 @@
             axios.post('http://localhost:8080/register/', jsonData)
                 .then(function(response) {
                     alert(response.data.message); // Show the response message
+                    registerModal.style.display = 'none'; // Close the modal
                 })
                 .catch(function(error) {
                     console.error(error);
@@ -50,6 +201,7 @@
             axios.post('http://localhost:8080/login/', jsonData)
                 .then(function(response) {
                     alert(response.data.message); // Show the response message
+                    loginModal.style.display = 'none'; // Close the modal
                 })
                 .catch(function(error) {
                     console.error(error);
