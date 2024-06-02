@@ -130,7 +130,7 @@
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closeLoginBtn">&times;</span>
+            <span class="close" id="closeLoginBtn">&times;"></span>
             <h2>登入</h2>
             <form id="loginForm">
                 <label for="loginAccount">帳號:</label>
@@ -143,7 +143,7 @@
     </div>
 
     <script>
-        // Get modals and buttons
+        // 獲取模態框和按鈕
         var registerModal = document.getElementById('registerModal');
         var loginModal = document.getElementById('loginModal');
         var openRegisterBtn = document.getElementById('openRegisterBtn');
@@ -151,7 +151,7 @@
         var closeRegisterBtn = document.getElementById('closeRegisterBtn');
         var closeLoginBtn = document.getElementById('closeLoginBtn');
 
-        // Open modals
+        // 打開模態框
         openRegisterBtn.onclick = function() {
             registerModal.style.display = 'flex';
         }
@@ -159,7 +159,7 @@
             loginModal.style.display = 'flex';
         }
 
-        // Close modals
+        // 關閉模態框
         closeRegisterBtn.onclick = function() {
             registerModal.style.display = 'none';
         }
@@ -167,7 +167,7 @@
             loginModal.style.display = 'none';
         }
 
-        // Close modal when clicking outside
+        // 點擊外部關閉模態框
         window.onclick = function(event) {
             if (event.target == registerModal) {
                 registerModal.style.display = 'none';
@@ -177,16 +177,16 @@
             }
         }
 
-        // Form submission
+        // 表單提交
         document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            var formData = new FormData(this); // Get form data
+            event.preventDefault(); // 防止默認表單提交
+            var formData = new FormData(this); // 獲取表單數據
             var jsonData = {};
             formData.forEach((value, key) => jsonData[key] = value);
-            axios.post('http://localhost:8080/register/', jsonData)
+            axios.post('http://localhost:8080/register/', jsonData, { withCredentials: true })
                 .then(function(response) {
-                    alert(response.data.message); // Show the response message
-                    registerModal.style.display = 'none'; // Close the modal
+                    alert(response.data.message); // 顯示響應信息
+                    registerModal.style.display = 'none'; // 關閉模態框
                 })
                 .catch(function(error) {
                     console.error(error);
@@ -194,14 +194,17 @@
         });
 
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            var formData = new FormData(this); // Get form data
+            event.preventDefault(); // 防止默認表單提交
+            var formData = new FormData(this); // 獲取表單數據
             var jsonData = {};
             formData.forEach((value, key) => jsonData[key] = value);
-            axios.post('http://localhost:8080/login/', jsonData)
+            axios.post('http://localhost:8080/login/', jsonData, { withCredentials: true })
                 .then(function(response) {
-                    alert(response.data.message); // Show the response message
-                    loginModal.style.display = 'none'; // Close the modal
+                    alert(response.data.message); // 顯示響應信息
+                    loginModal.style.display = 'none'; // 關閉模態框
+                    if (response.data.redirect_url) {
+                        window.location.href = response.data.redirect_url; // 重定向到指定的URL
+                    }
                 })
                 .catch(function(error) {
                     console.error(error);

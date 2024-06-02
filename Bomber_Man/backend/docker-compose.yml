@@ -34,6 +34,11 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=a12345
+      - MYSQL_DB=bombman_db
     command: >
       sh -c "
       until mysql -h db -u root -pa12345 -e 'select 1' &> /dev/null; do
@@ -41,7 +46,7 @@ services:
         sleep 10
       done;
       echo 'MySQL is ready';
-      python app.py"
+      uvicorn app:app --host 0.0.0.0 --port 8080 --reload"
 
 volumes:
   db_data:
