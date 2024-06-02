@@ -23,20 +23,21 @@ export default class Character extends Item {
 	}
 
 	move(dx, dy) {
-		let newX = this.x + dx;
-		let newY = this.y + dy;
-		console.log(this.positionX, this.positionY);
+		let newX = Math.round(this.x + dx);
+    	let newY = Math.round(this.y + dy);
+
+		console.log(newX, newY);
 
 		newX = Math.max(1, Math.min(newX, 9));
 		newY = Math.max(1, Math.min(newY, 9));
 
-		this.targetX = newX;
-        this.targetY = newY;
+		/*this.targetX = newX;
+        this.targetY = newY;*/
 
-		/*if (BomberManMap.checkObject(newX, newY)) {
+		if (BomberManMap.checkObject(newX, newY)) {
             this.targetX = newX;
             this.targetY = newY;
-        }*/
+        }
 	}
 
 	draw() {

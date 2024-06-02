@@ -34,10 +34,14 @@ class BomberManMap {
 		this.character.move(dx, dy, this);
 	}
 
-	/*checkObject(x, y) {
+	checkObject(x, y) {
+		console.log("x is "+x+" y is "+y);
 		const item = this.items.get(`${x},${y}`);
-		return item instanceof Grass;
-	}*/
+		if (item instanceof Stone || item instanceof Brick) {
+			return false;
+		}
+		return true;
+	}
 }
 
 export default new BomberManMap()
