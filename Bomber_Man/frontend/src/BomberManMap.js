@@ -1,6 +1,6 @@
 import { Brick, Grass, Stone } from "./Items";
 import Character from "./Items/Character";
-const MAP_WIDTH = 11, MAP_HEIGHT = 11
+import { MAP_HEIGHT, MAP_WIDTH } from "./consts";
 
 class BomberManMap {
 	items = new Map();

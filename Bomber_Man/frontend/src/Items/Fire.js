@@ -2,8 +2,7 @@ import BomberManMap from "../BomberManMap";
 import { imageKeys } from "../ImageHandler";
 import Item from "./Item";
 import Grass from "./Grass";
-
-const FIRE_TIME = 2
+import { FIRE_TIME, MILLISEC_TO_SEC } from "../consts";
 
 export default class Fire extends Item {
 	constructor(x, y) {
@@ -12,6 +11,6 @@ export default class Fire extends Item {
 		this.y = y
 		setTimeout(() => {
 			BomberManMap.updateItem(this.x, this.y, new Grass(this.x, this.y))
-		}, FIRE_TIME * 1000)
+		}, FIRE_TIME * MILLISEC_TO_SEC)
 	}
 }
