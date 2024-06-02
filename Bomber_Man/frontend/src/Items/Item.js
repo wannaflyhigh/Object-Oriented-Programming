@@ -7,7 +7,7 @@ export default class Item {
 	constructor(imageKey) {
 		this.image = ImageHandler.loadedImages[imageKey]
 	}
-	display(x, y) {
-		image(this.image, x, y);
+	display() {
+		image(this.image, this.x * 100, this.y * 100);
 	}
 }

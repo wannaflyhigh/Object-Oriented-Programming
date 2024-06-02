@@ -11,7 +11,7 @@ export default class Bomb extends Item {
 		this.x = x
 		this.y = y
 		setTimeout(() => {
-			BomberManMap.updateItem(this.x, this.y, new Fire())
+			BomberManMap.updateItem(this.x, this.y, new Fire(this.x, this.y))
 		}, BOMB_TIME * 1000)
 	}
 }

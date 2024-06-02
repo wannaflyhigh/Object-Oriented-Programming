@@ -6,28 +6,28 @@ class BomberManMap {
 	items = new Map();
 
 	initMap() {
-		for (let i = 0; i < MAP_HEIGHT; i++) {
-			for (let j = 0; j < MAP_WIDTH; j++) {
-				if (i === 0 || j == 0 || i === MAP_HEIGHT - 1 || j === MAP_WIDTH - 1 ||
-					(i % 2 === 0 && j % 2 === 0)
+		for (let x = 0; x < MAP_HEIGHT; x++) {
+			for (let y = 0; y < MAP_WIDTH; y++) {
+				if (x === 0 || y == 0 || x === MAP_HEIGHT - 1 || y === MAP_WIDTH - 1 ||
+					(x % 2 === 0 && y % 2 === 0)
 				) {
-					this.items.set({ x: i, y: j }, new Stone())
+					this.items.set(`${x},${y}`, new Stone(x, y))
 					continue
 				}
-				this.items.set({ x: i, y: j }, Math.random() > 0.5 ? new Grass() : new Brick())
+				this.items.set(`${x},${y}`, Math.random() > 0.5 ? new Grass(x, y) : new Brick(x, y))
 			}
 		}
 	}
 
 	display() {
-		this.items.forEach((value, key) => {
-			value.display(key.x * 100, key.y * 100)
+		this.items.forEach((item, key) => {
+			item.display()
 		})
 	}
 
 	updateItem(x, y, newItem) {
-		this.items.delete({ x, y })
-		this.items.set({ x, y }, newItem)
+		this.items.delete(`${x},${y}`)
+		this.items.set(`${x},${y}`, newItem)
 	}
 
 	moveCharacter(dx, dy) {
@@ -35,9 +35,9 @@ class BomberManMap {
 	}
 
 	/*checkObject(x, y) {
-        const item = this.items.get(`${x},${y}`);
-        return item instanceof Grass;
-    }*/
+		const item = this.items.get(`${x},${y}`);
+		return item instanceof Grass;
+	}*/
 }
 
 export default new BomberManMap()
