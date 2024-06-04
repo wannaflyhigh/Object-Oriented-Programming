@@ -1,4 +1,5 @@
 import BomberManMap from "../BomberManMap";
+import ImageHandler from "../ImageHandler";
 import { imageKeys } from "../ImageHandler";
 import Bomb from "./Bomb";
 import Item from "./Item";
@@ -22,7 +23,14 @@ export default class Character extends Item {
 		this.targetY = this.y;
 		this.positionX = 1;
 		this.positionY = 1;
+		this.deathTimer = 0;
 	}
+
+	updateImage() {
+        if (this.isDead) {
+            this.image = ImageHandler.loadedImages[imageKeys.DEAD_CHARACTER];
+        }
+    }
 
 
 	move(dx, dy) {
@@ -43,6 +51,7 @@ export default class Character extends Item {
 
 	draw() {
 
+		this.updateImage();
 		const distanceX = this.targetX - this.x;
 		const distanceY = this.targetY - this.y;
 		const tolerance = 0.05;
@@ -50,17 +59,20 @@ export default class Character extends Item {
 		//if diagonal movement is allowed
 		const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-		if (distance > tolerance) { // 只有在离目标位置足够远时才移动
-			const moveX = (distanceX / distance) * this.moveSpeed / 60;
-			const moveY = (distanceY / distance) * this.moveSpeed / 60;
-	
-			this.x += moveX;
-			this.y += moveY;
-		} 
-
-		if(this.isDead){
-			console.log("dead")
-		}
+		if(!this.isDead){
+			if (distance > tolerance) {
+				const moveX = (distanceX / distance) * this.moveSpeed / 60;
+				const moveY = (distanceY / distance) * this.moveSpeed / 60;
+		
+				this.x += moveX;
+				this.y += moveY;
+			} 
+		}else {
+            this.deathTimer++;
+            if (this.deathTimer >= 180) {
+                this.respawn();
+            }
+        }
 
 		this.x = Math.max(1, Math.min(this.x, 9));
 		this.y = Math.max(1, Math.min(this.y, 9));
@@ -70,6 +82,19 @@ export default class Character extends Item {
 
 		image(this.image, this.x * 100, this.y * 100);
 	}
+
+	respawn() {
+        this.isDead = false;
+        this.deathTimer = 0;
+        this.x = 1;
+        this.y = 1;
+        this.targetX = this.x;
+        this.targetY = this.y;
+        this.positionX = 1;
+        this.positionY = 1;
+        this.image = ImageHandler.loadedImages[imageKeys.CHARACTER];
+    }
+
 
 	layBomb() {
 		BomberManMap.updateItem(this.positionX, this.positionY, new Bomb(this.positionX, this.positionY, this.fireRange))
