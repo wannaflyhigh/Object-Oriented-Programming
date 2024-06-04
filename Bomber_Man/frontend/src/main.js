@@ -3,6 +3,7 @@ import { sketch } from 'p5js-wrapper';
 import ImageHandler from './ImageHandler';
 import BomberManMap from './BomberManMap';
 import Character from "./Items/Character";
+import Fire from './Items/Fire';
 
 const bomberManMap = BomberManMap
 let character;
@@ -28,6 +29,14 @@ sketch.draw = function () {
 	background(100);
 	scale(0.4);
 	bomberManMap.display()
+
+	const characterX = character.positionX;
+    const characterY = character.positionY;
+    const itemAtCharacter = bomberManMap.getItem(characterX, characterY);
+    if (itemAtCharacter instanceof Fire) {
+        character.isDead = true;
+    }
+
 	character.draw()
 
 	let dx = 0, dy = 0;
@@ -45,11 +54,6 @@ sketch.draw = function () {
 		dx = 1;
 		dy = 0;
 	}
-
-	/*if (keyStates.up) dy = -1;
-	else if (keyStates.down) dy = 1;
-	if (keyStates.left) dx = -1;
-	else if (keyStates.right) dx = 1;*/
 
 	character.move(dx, dy);
 }

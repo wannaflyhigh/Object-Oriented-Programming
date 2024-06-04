@@ -39,7 +39,6 @@ class BomberManMap {
 	}
 
 	isWalkable(x, y) {
-		console.log("x is " + x + " y is " + y);
 		const item = this.items.get(`${x},${y}`);
 		if (item instanceof Stone || item instanceof Brick || item instanceof Bomb) {
 			return false;

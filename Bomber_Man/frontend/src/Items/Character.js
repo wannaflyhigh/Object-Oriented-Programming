@@ -11,7 +11,8 @@ export default class Character extends Item {
 	targetX;
 	targetY;
 	moveSpeed = 3;
-	fireRange = 2
+	fireRange = 2;
+	isDead = false;
 
 	constructor() {
 		super(imageKeys.CHARACTER)
@@ -23,11 +24,10 @@ export default class Character extends Item {
 		this.positionY = 1;
 	}
 
+
 	move(dx, dy) {
 		let newX = (this.positionX + dx);
 		let newY = (this.positionY + dy);
-
-		console.log(newX, newY);
 
 		newX = Math.max(1, Math.min(newX, 9));
 		newY = Math.max(1, Math.min(newY, 9));
@@ -57,6 +57,10 @@ export default class Character extends Item {
 			this.x += moveX;
 			this.y += moveY;
 		} 
+
+		if(this.isDead){
+			console.log("dead")
+		}
 
 		this.x = Math.max(1, Math.min(this.x, 9));
 		this.y = Math.max(1, Math.min(this.y, 9));
