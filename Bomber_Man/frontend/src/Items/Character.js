@@ -24,8 +24,8 @@ export default class Character extends Item {
 	}
 
 	move(dx, dy) {
-		let newX = Math.round(this.x + dx);
-		let newY = Math.round(this.y + dy);
+		let newX = (this.positionX + dx);
+		let newY = (this.positionY + dy);
 
 		console.log(newX, newY);
 
@@ -35,7 +35,7 @@ export default class Character extends Item {
 		/*this.targetX = newX;
 		this.targetY = newY;*/
 
-		if (BomberManMap.checkObject(newX, newY)) {
+		if (BomberManMap.isWalkable(newX,newY)) {
 			this.targetX = newX;
 			this.targetY = newY;
 		}
@@ -45,20 +45,18 @@ export default class Character extends Item {
 
 		const distanceX = this.targetX - this.x;
 		const distanceY = this.targetY - this.y;
+		const tolerance = 0.05;
 
 		//if diagonal movement is allowed
 		const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-		if (distance < 0.01) {
-			this.x = this.targetX;
-			this.y = this.targetY;
-		} else {
+		if (distance > tolerance) { // 只有在离目标位置足够远时才移动
 			const moveX = (distanceX / distance) * this.moveSpeed / 60;
 			const moveY = (distanceY / distance) * this.moveSpeed / 60;
-
+	
 			this.x += moveX;
 			this.y += moveY;
-		}
+		} 
 
 		this.x = Math.max(1, Math.min(this.x, 9));
 		this.y = Math.max(1, Math.min(this.y, 9));

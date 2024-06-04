@@ -1,4 +1,4 @@
-import { Brick, Grass, Stone } from "./Items";
+import { Bomb, Brick, Grass, Stone } from "./Items";
 import Character from "./Items/Character";
 import { MAP_HEIGHT, MAP_WIDTH } from "./consts";
 
@@ -38,10 +38,10 @@ class BomberManMap {
 		this.character.move(dx, dy, this);
 	}
 
-	checkObject(x, y) {
+	isWalkable(x, y) {
 		console.log("x is " + x + " y is " + y);
 		const item = this.items.get(`${x},${y}`);
-		if (item instanceof Stone || item instanceof Brick) {
+		if (item instanceof Stone || item instanceof Brick || item instanceof Bomb) {
 			return false;
 		}
 		return true;
