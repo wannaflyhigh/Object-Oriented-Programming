@@ -1,7 +1,7 @@
 import { imageKeys } from "../ImageHandler";
-import Item from "./Item";
+import ExplodeAbleItem from "./ExplodeAbleItem";
 
-export default class Grass extends Item {
+export default class Grass extends ExplodeAbleItem {
 	constructor(x, y) {
 		super(imageKeys.GRASS)
 		this.x = x

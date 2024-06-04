@@ -30,12 +30,16 @@ class BomberManMap {
 		this.items.set(`${x},${y}`, newItem)
 	}
 
+	getItem(x, y) {
+		return this.items.get(`${x},${y}`)
+	}
+
 	moveCharacter(dx, dy) {
 		this.character.move(dx, dy, this);
 	}
 
 	checkObject(x, y) {
-		console.log("x is "+x+" y is "+y);
+		console.log("x is " + x + " y is " + y);
 		const item = this.items.get(`${x},${y}`);
 		if (item instanceof Stone || item instanceof Brick) {
 			return false;

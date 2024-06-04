@@ -1,7 +1,7 @@
 import { imageKeys } from "../ImageHandler";
-import Item from "./Item";
+import ExplodeAbleItem from "./ExplodeAbleItem";
 
-export default class Brick extends Item {
+export default class Brick extends ExplodeAbleItem {
 	constructor(x, y) {
 		super(imageKeys.BRICK)
 		this.x = x

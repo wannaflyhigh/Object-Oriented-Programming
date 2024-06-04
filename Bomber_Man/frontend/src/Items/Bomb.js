@@ -1,16 +1,47 @@
 import BomberManMap from "../BomberManMap";
 import { imageKeys } from "../ImageHandler";
 import { BOMB_TIME, MILLISEC_TO_SEC } from "../consts";
+import ExplodeAbleItem from "./ExplodeAbleItem";
 import Fire from "./Fire";
-import Item from "./Item";
 
-export default class Bomb extends Item {
-	constructor(x, y) {
+export default class Bomb extends ExplodeAbleItem {
+	fireRange = 2
+	constructor(x, y, fireRange) {
 		super(imageKeys.BOMB)
 		this.x = x
 		this.y = y
+		this.fireRange = fireRange
 		setTimeout(() => {
-			BomberManMap.updateItem(this.x, this.y, new Fire(this.x, this.y))
+			this.explode()
 		}, BOMB_TIME * MILLISEC_TO_SEC)
+	}
+	explode() {
+		// explode self, then explode up, down, left, and right
+		// NOTE: REFACTOR!!
+		BomberManMap.updateItem(this.x, this.y, new Fire(this.x, this.y))
+		for (let i = 0; i < this.fireRange; i++) {
+			const curItem = BomberManMap.getItem(this.x + i + 1, this.y)
+			if (!curItem) break
+			if (!curItem.isExplodeAble) break
+			curItem.explode()
+		}
+		for (let i = 0; i < this.fireRange; i++) {
+			const curItem = BomberManMap.getItem(this.x - i - 1, this.y)
+			if (!curItem) break
+			if (!curItem.isExplodeAble) break
+			curItem.explode()
+		}
+		for (let i = 0; i < this.fireRange; i++) {
+			const curItem = BomberManMap.getItem(this.x, this.y + i + 1)
+			if (!curItem) break
+			if (!curItem.isExplodeAble) break
+			curItem.explode()
+		}
+		for (let i = 0; i < this.fireRange; i++) {
+			const curItem = BomberManMap.getItem(this.x, this.y - i - 1)
+			if (!curItem) break
+			if (!curItem.isExplodeAble) break
+			curItem.explode()
+		}
 	}
 }

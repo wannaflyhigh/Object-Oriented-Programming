@@ -5,5 +5,6 @@ import Bomb from "./Bomb";
 import Character from "./Character";
 import Fire from "./Fire";
 import Item from "./Item";
+import ExplodeAbleItem from "./ExplodeAbleItem";
 export default Item
-export { Grass, Stone, Brick, Bomb, Character, Fire }
+export { Grass, Stone, Brick, Bomb, Character, Fire, ExplodeAbleItem }
