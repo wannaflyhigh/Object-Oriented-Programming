@@ -6,16 +6,18 @@ import Fire from "./Fire";
 
 export default class Bomb extends ExplodeAbleItem {
 	fireRange = 2
+	timeoutID
 	constructor(x, y, fireRange) {
 		super(imageKeys.BOMB)
 		this.x = x
 		this.y = y
 		this.fireRange = fireRange
-		setTimeout(() => {
+		this.timeoutID = setTimeout(() => {
 			this.explode()
 		}, BOMB_TIME * MILLISEC_TO_SEC)
 	}
 	explode() {
+		clearTimeout(this.timeoutID)
 		// explode self, then explode up, down, left, and right
 		// NOTE: REFACTOR!!
 		BomberManMap.updateItem(this.x, this.y, new Fire(this.x, this.y))
