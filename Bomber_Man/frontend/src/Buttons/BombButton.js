@@ -1,11 +1,11 @@
 import { imageKeys } from "../ImageHandler";
 import Button from "./Button";
 
-const BOMB_BUTTON_WIDTH = 619, BOMB_BUTTON_HEIGHT = 559
+const BUTTON_WIDTH = 619, BUTTON_HEIGHT = 559
 
 class BombButton extends Button {
 	constructor(x, y) {
-		super(x, y, imageKeys.BOMB_BUTTON, BOMB_BUTTON_WIDTH, BOMB_BUTTON_HEIGHT)
+		super(x, y, imageKeys.BOMB_BUTTON, BUTTON_WIDTH, BUTTON_HEIGHT)
 	}
 }
 

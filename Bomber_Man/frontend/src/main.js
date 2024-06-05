@@ -7,7 +7,7 @@ import Enemy from "./Items/Enemy";
 import Fire from './Items/Fire';
 import { BombPlus, FirePlus, Grass, SpeedUp } from './Items';
 import { SCALE_SIZE } from './consts';
-import BombButton from './Buttons/BombButton';
+import { BombButton, Buttons, DownButton, LeftButton, RightButton, UpButton } from './Buttons';
 
 const bomberManMap = BomberManMap
 let character;
@@ -35,7 +35,10 @@ sketch.setup = function () {
 	pixelDensity(1)
 	ImageHandler.loadImages()
 	bomberManMap.initMap()
-	BombButton.initImage()
+
+	Buttons.forEach(btn => {
+		btn.initImage()
+	})
 
 	character = new Character()
 
@@ -49,7 +52,10 @@ sketch.draw = function () {
 	background(100);
 	scale(SCALE_SIZE);
 	bomberManMap.display()
-	BombButton.display()
+
+	Buttons.forEach(btn => {
+		btn.display()
+	})
 
 	for (const enemy of enemies) {
 		if (!enemy.isDead && !character.isDead) {
@@ -116,8 +122,27 @@ sketch.mousePressed = function () {
 	// console.log('here');
 	// console.log({ mouseX, mouseY });
 	BombButton.touchPending(mouseX, mouseY, () => { character.layBomb() })
-
+	UpButton.touchPending(mouseX, mouseY, () => {
+		resetKeyStates();
+		keyStates.up = true;
+	})
+	DownButton.touchPending(mouseX, mouseY, () => {
+		resetKeyStates();
+		keyStates.down = true;
+	})
+	RightButton.touchPending(mouseX, mouseY, () => {
+		resetKeyStates();
+		keyStates.right = true;
+	})
+	LeftButton.touchPending(mouseX, mouseY, () => {
+		resetKeyStates();
+		keyStates.left = true;
+	})
 }
+
+sketch.mouseReleased = (() => {
+	resetKeyStates()
+})
 
 function keyPressed() {
 	if (key === 'w') {
