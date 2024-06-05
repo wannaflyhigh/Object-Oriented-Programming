@@ -11,8 +11,9 @@ export default class Character extends Item {
 	positionY;
 	targetX;
 	targetY;
-	moveSpeed = 3;
-	fireRange = 1;
+	moveSpeed;
+	fireRange;
+	bombNum;
 	isDead = false;
 
 	constructor() {
@@ -24,6 +25,9 @@ export default class Character extends Item {
 		this.positionX = 1;
 		this.positionY = 1;
 		this.deathTimer = 0;
+		this.fireRange = 1;
+		this.moveSpeed = 2;
+		this.bombNum = 1;
 	}
 
 	updateImage() {
@@ -95,5 +99,19 @@ export default class Character extends Item {
 
 	layBomb() {
 		BomberManMap.updateItem(this.positionX, this.positionY, new Bomb(this.positionX, this.positionY, this.fireRange))
+	}
+
+	firePlus(){
+		this.fireRange = this.fireRange + 1;
+	}
+
+	bombPlus(){
+		this.bombNum = this.bombNum + 1;
+	}
+
+	speedUp(){
+		if(this.moveSpeed<4){
+			this.moveSpeed = this.moveSpeed +0.5;
+		}
 	}
 }

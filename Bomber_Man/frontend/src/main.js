@@ -5,6 +5,7 @@ import BomberManMap from './BomberManMap';
 import Character from "./Items/Character";
 import Enemy from "./Items/Enemy";
 import Fire from './Items/Fire';
+import { BombPlus, FirePlus, Grass, SpeedUp } from './Items';
 
 const bomberManMap = BomberManMap
 let character;
@@ -48,7 +49,7 @@ sketch.draw = function () {
         if (!enemy.isDead && !character.isDead) {
             if (enemy.positionX === character.positionX && enemy.positionY === character.positionY) {
                 character.isDead = true;
-                break; // 如果碰到一個敵人就退出循環
+                break;
             }
         }
     }
@@ -56,6 +57,18 @@ sketch.draw = function () {
 	const characterX = character.positionX;
     const characterY = character.positionY;
     const itemAtCharacter = bomberManMap.getItem(characterX, characterY);
+	if (itemAtCharacter instanceof SpeedUp){
+		character.speedUp();
+		bomberManMap.updateItem(characterX,characterY,new Grass(characterX, characterY))
+	}
+	if (itemAtCharacter instanceof BombPlus){
+		character.bombPlus();
+		bomberManMap.updateItem(characterX,characterY,new Grass(characterX, characterY))
+	}
+	if (itemAtCharacter instanceof FirePlus){
+		character.firePlus();
+		bomberManMap.updateItem(characterX,characterY,new Grass(characterX, characterY))
+	}
     if (itemAtCharacter instanceof Fire) {
         character.isDead = true;
     }
