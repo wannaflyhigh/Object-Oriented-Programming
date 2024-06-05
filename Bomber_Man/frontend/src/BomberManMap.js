@@ -8,6 +8,15 @@ class BomberManMap {
 	initMap() {
 		for (let x = 0; x < MAP_HEIGHT; x++) {
 			for (let y = 0; y < MAP_WIDTH; y++) {
+				if ((x == 1 && y == 1) || (x == 1 && y == 2) || (x == 2 && y == 1)
+					|| (x == MAP_HEIGHT - 2 && y == MAP_WIDTH - 2) || (x == MAP_HEIGHT - 2 && y == MAP_WIDTH - 3) || (x == MAP_HEIGHT - 3 && y == MAP_WIDTH - 2)
+					|| (x == 1 && y == MAP_WIDTH - 2) || (x == 1 && y == MAP_WIDTH - 3) || (x == 2 && y == MAP_WIDTH - 2)
+					|| (x == MAP_HEIGHT - 2 && y == 1) || (x == MAP_HEIGHT - 2 && y == 2) || (x == MAP_HEIGHT - 3 && y == 1)
+				) {
+					// Make sure four corners are empty
+					this.items.set(`${x},${y}`, new Grass(x, y))
+					continue
+				}
 				if (x === 0 || y == 0 || x === MAP_HEIGHT - 1 || y === MAP_WIDTH - 1 ||
 					(x % 2 === 0 && y % 2 === 0)
 				) {
@@ -39,13 +48,13 @@ class BomberManMap {
 	}
 
 	isWalkable(x, y, type) {
-		if(type == "character"){
+		if (type == "character") {
 			const item = this.items.get(`${x},${y}`);
 			if (item instanceof Stone || item instanceof Brick || item instanceof Bomb) {
 				return false;
 			}
 			return true;
-		}else{
+		} else {
 			const item = this.items.get(`${x},${y}`);
 			if (item instanceof Stone || item instanceof Brick || item instanceof Bomb || item instanceof Fire) {
 				return false;
