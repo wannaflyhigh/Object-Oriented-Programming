@@ -1,5 +1,5 @@
 import ImageHandler from "../ImageHandler";
-import { IMAGE_HEIGHT, ITEM_WIDTH } from "../consts";
+import { ITEM_HEIGHT, ITEM_WIDTH } from "../consts";
 
 export default class Item {
 	image
@@ -9,6 +9,6 @@ export default class Item {
 		this.image = ImageHandler.loadedImages[imageKey]
 	}
 	display() {
-        image(this.image, this.x * ITEM_WIDTH, this.y * IMAGE_HEIGHT, ITEM_WIDTH, IMAGE_HEIGHT);
-    }
+		image(this.image, this.x * ITEM_WIDTH, this.y * ITEM_HEIGHT, ITEM_WIDTH, ITEM_HEIGHT);
+	}
 }

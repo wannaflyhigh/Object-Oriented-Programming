@@ -3,7 +3,7 @@ import ImageHandler from "../ImageHandler";
 import { imageKeys } from "../ImageHandler";
 import Bomb from "./Bomb";
 import Item from "./Item";
-import { IMAGE_HEIGHT, ITEM_WIDTH } from "../consts";
+import { ITEM_HEIGHT, ITEM_WIDTH } from "../consts";
 
 export default class Character extends Item {
 	x;
@@ -83,7 +83,7 @@ export default class Character extends Item {
 		this.positionX = Math.round(this.x);
 		this.positionY = Math.round(this.y);
 
-		image(this.image, this.x * ITEM_WIDTH, this.y * IMAGE_HEIGHT, ITEM_WIDTH, IMAGE_HEIGHT);
+		image(this.image, this.x * ITEM_WIDTH, this.y * ITEM_HEIGHT, ITEM_WIDTH, ITEM_HEIGHT);
 	}
 
 	respawn() {
@@ -100,33 +100,33 @@ export default class Character extends Item {
 
 
 	layBomb() {
-		if(this.isDead == false){
+		if (this.isDead == false) {
 			if (this.activeBombs.length < this.bombNum) {
 				const newBomb = new Bomb(this.positionX, this.positionY, this.fireRange, this);
 				BomberManMap.updateItem(this.positionX, this.positionY, newBomb);
 				this.activeBombs.push(newBomb);
 			}
 		}
-    }
+	}
 
 	removeBomb(bomb) {
-        const index = this.activeBombs.indexOf(bomb);
-        if (index !== -1) {
-            this.activeBombs.splice(index, 1);
-        }
-    }
+		const index = this.activeBombs.indexOf(bomb);
+		if (index !== -1) {
+			this.activeBombs.splice(index, 1);
+		}
+	}
 
-	firePlus(){
+	firePlus() {
 		this.fireRange = this.fireRange + 1;
 	}
 
-	bombPlus(){
+	bombPlus() {
 		this.bombNum = this.bombNum + 1;
 	}
 
-	speedUp(){
-		if(this.moveSpeed<5){
-			this.moveSpeed = this.moveSpeed +0.5;
+	speedUp() {
+		if (this.moveSpeed < 5) {
+			this.moveSpeed = this.moveSpeed + 0.5;
 		}
 	}
 }
