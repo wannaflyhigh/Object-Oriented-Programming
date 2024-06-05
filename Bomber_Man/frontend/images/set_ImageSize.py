@@ -1,6 +1,6 @@
 from PIL import Image
 
-def resize_image(input_path, output_path, size=(100, 100)):
+def resize_image(input_path, output_path, size=(300, 200)):
     with Image.open(input_path) as img:
         img = img.resize(size, Image.LANCZOS)
         img.save(output_path)

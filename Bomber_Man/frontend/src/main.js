@@ -6,9 +6,11 @@ import Character from "./Items/Character";
 import Enemy from "./Items/Enemy";
 import Fire from './Items/Fire';
 import { BombPlus, FirePlus, Grass, SpeedUp } from './Items';
+import FSbutton from './Items/fullscreen_button';
 
 const bomberManMap = BomberManMap
 let character;
+
 const enemies = [];
 const enemyPositions = [
     { x: 9, y: 1 },
@@ -22,7 +24,10 @@ const keyStates = {
 	right: false
 };
 
-let showFullScreenMessage = true;
+let fs = false; 
+let fullscreenButton;
+let fsbuttonX ;
+let fsbuttonY ;
 
 sketch.preload = function () {
 	console.log("hi")
@@ -32,18 +37,26 @@ sketch.setup = function () {
 	createCanvas(1920, 1080);
 	ImageHandler.loadImages()
 	bomberManMap.initMap()
+	
 	character = new Character()
 
 	for (const position of enemyPositions) {
         const enemy = new Enemy(position.x, position.y);
         enemies.push(enemy);
     }
+	fullscreenButton = new FSbutton(fsbuttonX, fsbuttonY);
+	fsbuttonX = 4;
+	fsbuttonY = 4;
 }
 
 sketch.draw = function () {
 	background(100);
 	scale(0.4);
 	bomberManMap.display()
+
+	if(!fs){
+		bomberManMap.updateItem(fsbuttonX,fsbuttonY,new FSbutton(fsbuttonX, fsbuttonY))
+	}
 
 	for (const enemy of enemies) {
         if (!enemy.isDead && !character.isDead) {
@@ -105,21 +118,22 @@ sketch.draw = function () {
 
 	character.move(dx, dy);
 
-	if (showFullScreenMessage) {
-		textSize(75);
-		fill(255);
-		text("Press ESC to enter fullscreen mode", 0, height / 2);
-	}
+	
+
 }
 
 sketch.mousePressed = function () {
 	console.log('here');
 	console.log({ mouseX, mouseY });
 	// NOTE: full screen while playing?
-	// if (mouseX > 0 && mouseX < windowWidth && mouseY > 0 && mouseY < windowHeight) {
-	// 	let fs = fullscreen();
-	// 	fullscreen(!fs);
-	// }
+	
+	if (!fs && mouseX > 4000 && mouseX < 7000  && mouseY >  4000 && mouseY < 6000 ) {
+		fullscreen(!fs);
+		fs = true;
+		bomberManMap.removeItem(fullscreenButtonX, fullscreenButtonY);
+	}
+
+	
 }
 
 function keyPressed() {
