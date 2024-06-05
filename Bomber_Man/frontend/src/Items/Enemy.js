@@ -4,7 +4,7 @@ import Item from "./Item";
 import ImageHandler from "../ImageHandler";
 
 export default class Enemy extends Item{
-    moveInterval = 1200;
+    moveInterval = 500;
     moveTimer = 0;
     x;
     y;
