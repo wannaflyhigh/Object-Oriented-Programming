@@ -1,1 +1,33 @@
+# Bomber Man
+
+> project base cloned from <https://github.com/makinteract/p5js-vite/>
+
+## How To
+
+- [Demo Page](https://web.ntnu.edu.tw/~40971229h/BomberMan/)
+  > Portrait mode only
+
+  > Due to financial problem, dockerfile, which used in backend, isn't online yet
+
+- Scripts
+
+### For [backend](./backend/)
+
+```cmd
 docker-compose up --build
+
+# new terminal
+npm i -g http-server
+http-server -c-1 -o ./test.html
+```
+
+### For [frontend](./frontend/)
+
+```cmd
+npm i
+npm run dev
+
+# or
+npm run build
+cp -r image dist/
+```
