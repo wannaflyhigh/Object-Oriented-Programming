@@ -13,11 +13,11 @@ export default class Brick extends ExplodeAbleItem {
 		super(imageKeys.BRICK)
 		this.x = x
 		this.y = y
-		this.itemAfterFire = Math.random() > SPEED_UP_RATE ?
+		this.itemAfterFire = Math.random() < SPEED_UP_RATE ?
 			SpeedUp :
-			Math.random() > SPEED_UP_RATE + FIREPLUS_RATE ?
+			Math.random() < SPEED_UP_RATE + FIREPLUS_RATE ?
 				FirePlus :
-				Math.random() > SPEED_UP_RATE + FIREPLUS_RATE + BOMB_ADD_RATE ?
+				Math.random() < SPEED_UP_RATE + FIREPLUS_RATE + BOMB_ADD_RATE ?
 					BombPlus
 					: Grass
 	}
