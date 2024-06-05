@@ -12,7 +12,7 @@ export default class Character extends Item {
 	targetX;
 	targetY;
 	moveSpeed = 3;
-	fireRange = 2;
+	fireRange = 1;
 	isDead = false;
 
 	constructor() {
@@ -27,10 +27,10 @@ export default class Character extends Item {
 	}
 
 	updateImage() {
-        if (this.isDead) {
-            this.image = ImageHandler.loadedImages[imageKeys.DEAD_CHARACTER];
-        }
-    }
+		if (this.isDead) {
+			this.image = ImageHandler.loadedImages[imageKeys.DEAD_CHARACTER];
+		}
+	}
 
 
 	move(dx, dy) {
@@ -40,7 +40,7 @@ export default class Character extends Item {
 		newX = Math.max(1, Math.min(newX, 9));
 		newY = Math.max(1, Math.min(newY, 9));
 
-		if (BomberManMap.isWalkable(newX,newY,"character")) {
+		if (BomberManMap.isWalkable(newX, newY, "character")) {
 			this.targetX = newX;
 			this.targetY = newY;
 		}
@@ -56,20 +56,20 @@ export default class Character extends Item {
 		//if diagonal movement is allowed
 		const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-		if(!this.isDead){
+		if (!this.isDead) {
 			if (distance > tolerance) {
 				const moveX = (distanceX / distance) * this.moveSpeed / 60;
 				const moveY = (distanceY / distance) * this.moveSpeed / 60;
-		
+
 				this.x += moveX;
 				this.y += moveY;
-			} 
-		}else {
-            this.deathTimer++;
-            if (this.deathTimer >= 180) {
-                this.respawn();
-            }
-        }
+			}
+		} else {
+			this.deathTimer++;
+			if (this.deathTimer >= 180) {
+				this.respawn();
+			}
+		}
 
 		this.x = Math.max(1, Math.min(this.x, 9));
 		this.y = Math.max(1, Math.min(this.y, 9));
@@ -81,16 +81,16 @@ export default class Character extends Item {
 	}
 
 	respawn() {
-        this.isDead = false;
-        this.deathTimer = 0;
-        this.x = 1;
-        this.y = 1;
-        this.targetX = this.x;
-        this.targetY = this.y;
-        this.positionX = 1;
-        this.positionY = 1;
-        this.image = ImageHandler.loadedImages[imageKeys.CHARACTER];
-    }
+		this.isDead = false;
+		this.deathTimer = 0;
+		this.x = 1;
+		this.y = 1;
+		this.targetX = this.x;
+		this.targetY = this.y;
+		this.positionX = 1;
+		this.positionY = 1;
+		this.image = ImageHandler.loadedImages[imageKeys.CHARACTER];
+	}
 
 
 	layBomb() {

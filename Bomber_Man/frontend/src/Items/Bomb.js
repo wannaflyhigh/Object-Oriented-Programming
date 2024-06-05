@@ -5,7 +5,7 @@ import ExplodeAbleItem from "./ExplodeAbleItem";
 import Fire from "./Fire";
 
 export default class Bomb extends ExplodeAbleItem {
-	fireRange = 2
+	fireRange = 1
 	timeoutID
 	constructor(x, y, fireRange) {
 		super(imageKeys.BOMB)
