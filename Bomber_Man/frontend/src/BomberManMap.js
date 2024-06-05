@@ -43,10 +43,6 @@ class BomberManMap {
 		this.items.set(`${x},${y}`, newItem)
 	}
 
-	removeButton(x, y, newItem) {
-		this.items.delete(`${x},${y}`)
-	}
-
 	getItem(x, y) {
 		return this.items.get(`${x},${y}`)
 	}
