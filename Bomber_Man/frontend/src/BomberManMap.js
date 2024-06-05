@@ -1,6 +1,6 @@
 import { Bomb, Brick, Grass, Stone, Fire } from "./Items";
 import Character from "./Items/Character";
-import { MAP_HEIGHT, MAP_WIDTH } from "./consts";
+import { BRICK_GRASS_RATIO, MAP_HEIGHT, MAP_WIDTH } from "./consts";
 
 class BomberManMap {
 	items = new Map();
@@ -20,10 +20,11 @@ class BomberManMap {
 				if (x === 0 || y == 0 || x === MAP_HEIGHT - 1 || y === MAP_WIDTH - 1 ||
 					(x % 2 === 0 && y % 2 === 0)
 				) {
+					// Make sure walls are correct
 					this.items.set(`${x},${y}`, new Stone(x, y))
 					continue
 				}
-				this.items.set(`${x},${y}`, Math.random() > 0.5 ? new Grass(x, y) : new Brick(x, y))
+				this.items.set(`${x},${y}`, Math.random() > BRICK_GRASS_RATIO ? new Grass(x, y) : new Brick(x, y))
 			}
 		}
 	}
