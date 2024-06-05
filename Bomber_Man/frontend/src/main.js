@@ -14,6 +14,8 @@ const keyStates = {
 	right: false
 };
 
+let showFullScreenMessage = true;
+
 sketch.preload = function () {
 	console.log("hi")
 }
@@ -23,6 +25,7 @@ sketch.setup = function () {
 	ImageHandler.loadImages()
 	bomberManMap.initMap()
 	character = new Character()
+	
 }
 
 sketch.draw = function () {
@@ -56,6 +59,12 @@ sketch.draw = function () {
 	}
 
 	character.move(dx, dy);
+
+	if (showFullScreenMessage) {
+		textSize(75);
+		fill(255);
+		text("Press ESC to enter fullscreen mode", 0, height / 2);
+	}
 }
 
 sketch.mousePressed = function () {
@@ -84,6 +93,10 @@ function keyPressed() {
 	}
 	else if (key === 'o') {
 		character.layBomb()
+	}else if (key === 'Escape') { 
+		let fs = fullscreen();
+		fullscreen(!fs);
+		showFullScreenMessage = false;
 	}
 }
 
