@@ -1,4 +1,4 @@
-import { Bomb, Brick, Grass, Stone } from "./Items";
+import { Bomb, Brick, Grass, Stone, Fire } from "./Items";
 import Character from "./Items/Character";
 import { MAP_HEIGHT, MAP_WIDTH } from "./consts";
 
@@ -38,12 +38,20 @@ class BomberManMap {
 		this.character.move(dx, dy, this);
 	}
 
-	isWalkable(x, y) {
-		const item = this.items.get(`${x},${y}`);
-		if (item instanceof Stone || item instanceof Brick || item instanceof Bomb) {
-			return false;
+	isWalkable(x, y, type) {
+		if(type == "character"){
+			const item = this.items.get(`${x},${y}`);
+			if (item instanceof Stone || item instanceof Brick || item instanceof Bomb) {
+				return false;
+			}
+			return true;
+		}else{
+			const item = this.items.get(`${x},${y}`);
+			if (item instanceof Stone || item instanceof Brick || item instanceof Bomb || item instanceof Fire) {
+				return false;
+			}
+			return true;
 		}
-		return true;
 	}
 }
 

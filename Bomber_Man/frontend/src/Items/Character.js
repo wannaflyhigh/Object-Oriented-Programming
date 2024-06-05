@@ -40,10 +40,7 @@ export default class Character extends Item {
 		newX = Math.max(1, Math.min(newX, 9));
 		newY = Math.max(1, Math.min(newY, 9));
 
-		/*this.targetX = newX;
-		this.targetY = newY;*/
-
-		if (BomberManMap.isWalkable(newX,newY)) {
+		if (BomberManMap.isWalkable(newX,newY,"character")) {
 			this.targetX = newX;
 			this.targetY = newY;
 		}

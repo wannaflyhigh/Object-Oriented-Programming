@@ -3,10 +3,17 @@ import { sketch } from 'p5js-wrapper';
 import ImageHandler from './ImageHandler';
 import BomberManMap from './BomberManMap';
 import Character from "./Items/Character";
+import Enemy from "./Items/Enemy";
 import Fire from './Items/Fire';
 
 const bomberManMap = BomberManMap
 let character;
+const enemies = [];
+const enemyPositions = [
+    { x: 9, y: 1 },
+    { x: 1, y: 9 },
+    { x: 9, y: 9 }
+];
 const keyStates = {
 	up: false,
 	down: false,
@@ -25,13 +32,26 @@ sketch.setup = function () {
 	ImageHandler.loadImages()
 	bomberManMap.initMap()
 	character = new Character()
-	
+
+	for (const position of enemyPositions) {
+        const enemy = new Enemy(position.x, position.y);
+        enemies.push(enemy);
+    }
 }
 
 sketch.draw = function () {
 	background(100);
 	scale(0.4);
 	bomberManMap.display()
+
+	for (const enemy of enemies) {
+        if (!enemy.isDead && !character.isDead) {
+            if (enemy.positionX === character.positionX && enemy.positionY === character.positionY) {
+                character.isDead = true;
+                break; // 如果碰到一個敵人就退出循環
+            }
+        }
+    }
 
 	const characterX = character.positionX;
     const characterY = character.positionY;
@@ -41,6 +61,18 @@ sketch.draw = function () {
     }
 
 	character.draw()
+
+	for (const enemy of enemies) {
+        const enemyX = enemy.positionX;
+        const enemyY = enemy.positionY;
+        const itemAtEnemy = bomberManMap.getItem(enemyX, enemyY);
+        if (itemAtEnemy instanceof Fire) {
+            enemy.isDead = true;
+        }
+
+        enemy.draw();
+    }
+
 
 	let dx = 0, dy = 0;
 
