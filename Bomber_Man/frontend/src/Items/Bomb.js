@@ -19,31 +19,34 @@ export default class Bomb extends ExplodeAbleItem {
 	explode() {
 		clearTimeout(this.timeoutID)
 		// explode self, then explode up, down, left, and right
-		// NOTE: REFACTOR!!
 		BomberManMap.updateItem(this.x, this.y, new Fire(this.x, this.y))
 		for (let i = 0; i < this.fireRange; i++) {
 			const curItem = BomberManMap.getItem(this.x + i + 1, this.y)
-			if (!curItem) break
-			if (!curItem.isExplodeAble) break
-			curItem.explode()
+			const keepExpand = this.expandFire(curItem)
+			if (!keepExpand) break
 		}
 		for (let i = 0; i < this.fireRange; i++) {
 			const curItem = BomberManMap.getItem(this.x - i - 1, this.y)
-			if (!curItem) break
-			if (!curItem.isExplodeAble) break
-			curItem.explode()
+			const keepExpand = this.expandFire(curItem)
+			if (!keepExpand) break
 		}
 		for (let i = 0; i < this.fireRange; i++) {
 			const curItem = BomberManMap.getItem(this.x, this.y + i + 1)
-			if (!curItem) break
-			if (!curItem.isExplodeAble) break
-			curItem.explode()
+			const keepExpand = this.expandFire(curItem)
+			if (!keepExpand) break
 		}
 		for (let i = 0; i < this.fireRange; i++) {
 			const curItem = BomberManMap.getItem(this.x, this.y - i - 1)
-			if (!curItem) break
-			if (!curItem.isExplodeAble) break
-			curItem.explode()
+			const keepExpand = this.expandFire(curItem)
+			if (!keepExpand) break
 		}
+	}
+
+	expandFire(curItem) {
+		if (!curItem) return false
+		if (!curItem.isExplodeAble) return false
+		const isBrick = curItem.explode()
+		if (isBrick) return false
+		return true
 	}
 }

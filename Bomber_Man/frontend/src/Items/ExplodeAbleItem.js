@@ -9,5 +9,6 @@ export default class ExplodeAbleItem extends Item {
 	}
 	explode() {
 		BomberManMap.updateItem(this.x, this.y, new Fire(this.x, this.y, this.itemAfterFire))
+		return this.isBrick
 	}
 }

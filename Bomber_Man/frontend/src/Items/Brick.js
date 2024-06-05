@@ -8,6 +8,7 @@ import SpeedUp from "./SpeedUp";
 
 export default class Brick extends ExplodeAbleItem {
 	itemAfterFire
+	isBrick = true
 	constructor(x, y) {
 		super(imageKeys.BRICK)
 		this.x = x
