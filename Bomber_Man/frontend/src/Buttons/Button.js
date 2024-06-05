@@ -1,5 +1,5 @@
 import ImageHandler from "../ImageHandler"
-import { SCALE_SIZE } from "../consts"
+import { IMAGE_HEIGHT, ITEM_WIDTH, SCALE_SIZE } from "../consts"
 
 export default class Button {
 	x
@@ -19,13 +19,13 @@ export default class Button {
 		this.image = ImageHandler.loadedImages[this.imageKey]
 	}
 	display() {
-		image(this.image, this.x, this.y);
+		image(this.image, this.x * ITEM_WIDTH, this.y * IMAGE_HEIGHT, ITEM_WIDTH * 2, IMAGE_HEIGHT * 2);
 	}
 	touchPending(mouseX, mouseY, todo) {
-		if ((mouseX / SCALE_SIZE >= this.x)
-			&& (mouseX / SCALE_SIZE <= this.x + this.width)
-			&& (mouseY / SCALE_SIZE >= this.y)
-			&& (mouseY / SCALE_SIZE <= this.y + this.height)
+		if ((mouseX / SCALE_SIZE >= this.x * ITEM_WIDTH)
+			&& (mouseX / SCALE_SIZE <= this.x * ITEM_WIDTH + ITEM_WIDTH * 2)
+			&& (mouseY / SCALE_SIZE >= this.y * IMAGE_HEIGHT)
+			&& (mouseY / SCALE_SIZE <= this.y * IMAGE_HEIGHT + IMAGE_HEIGHT * 2)
 		)
 			todo()
 	}

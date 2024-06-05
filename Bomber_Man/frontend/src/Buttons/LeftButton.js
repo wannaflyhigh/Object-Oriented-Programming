@@ -9,4 +9,4 @@ class LeftButton extends Button {
 	}
 }
 
-export default new LeftButton(60, 1550)
+export default new LeftButton(0.5, 13.5)

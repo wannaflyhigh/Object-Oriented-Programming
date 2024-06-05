@@ -9,4 +9,4 @@ class RightButton extends Button {
 	}
 }
 
-export default new RightButton(480, 1550)
+export default new RightButton(4.5, 13.5)

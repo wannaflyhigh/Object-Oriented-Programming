@@ -9,4 +9,4 @@ class DownButton extends Button {
 	}
 }
 
-export default new DownButton(270, 1550)
+export default new DownButton(2.5, 13.5)

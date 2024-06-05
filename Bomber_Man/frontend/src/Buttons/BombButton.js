@@ -9,4 +9,4 @@ class BombButton extends Button {
 	}
 }
 
-export default new BombButton(800, 1300)
+export default new BombButton(8, 12.5)

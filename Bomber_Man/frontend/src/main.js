@@ -131,7 +131,7 @@ sketch.draw = function () {
 
 sketch.mousePressed = function () {
 	// console.log('here');
-	// console.log({ mouseX, mouseY });
+	console.log({ mouseX, mouseY });
 	BombButton.touchPending(mouseX, mouseY, () => { character.layBomb() })
 	UpButton.touchPending(mouseX, mouseY, () => {
 		resetKeyStates();
