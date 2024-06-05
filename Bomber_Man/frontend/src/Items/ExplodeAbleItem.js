@@ -8,6 +8,6 @@ export default class ExplodeAbleItem extends Item {
 		super(imageKey)
 	}
 	explode() {
-		BomberManMap.updateItem(this.x, this.y, new Fire(this.x, this.y))
+		BomberManMap.updateItem(this.x, this.y, new Fire(this.x, this.y, this.itemAfterFire))
 	}
 }
