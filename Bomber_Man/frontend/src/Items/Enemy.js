@@ -4,7 +4,7 @@ import Item from "./Item";
 import ImageHandler from "../ImageHandler";
 
 export default class Enemy extends Item{
-    moveInterval = 1500;
+    moveInterval = 1200;
     moveTimer = 0;
     x;
 	y;
@@ -12,7 +12,7 @@ export default class Enemy extends Item{
 	positionY;
 	targetX;
 	targetY;
-    moveSpeed = 2
+    moveSpeed = 3
 	isDead = false;
     deathTime = null;
 
@@ -44,7 +44,7 @@ export default class Enemy extends Item{
         } else {
             if (this.deathTime === null) {
                 this.deathTime = millis();
-            } else if (millis() - this.deathTime > 1000) {
+            } else if (millis() - this.deathTime > 800) {
                 return;
             }
             this.image = ImageHandler.loadedImages[imageKeys.DEAD_ENEMY];
