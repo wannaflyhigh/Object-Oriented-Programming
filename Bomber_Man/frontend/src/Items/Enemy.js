@@ -7,13 +7,13 @@ export default class Enemy extends Item{
     moveInterval = 1200;
     moveTimer = 0;
     x;
-	y;
-	positionX;
-	positionY;
-	targetX;
-	targetY;
+    y;
+    positionX;
+    positionY;
+    targetX;
+    targetY;
     moveSpeed = 3
-	isDead = false;
+    isDead = false;
     deathTime = null;
 
     constructor(int_x,int_y) {
