@@ -9,6 +9,6 @@ export default class Item {
 		this.image = ImageHandler.loadedImages[imageKey]
 	}
 	display() {
-		image(this.image, this.x * ITEM_WIDTH, this.y * IMAGE_HEIGHT);
-	}
+        image(this.image, this.x * ITEM_WIDTH, this.y * IMAGE_HEIGHT, ITEM_WIDTH, IMAGE_HEIGHT);
+    }
 }

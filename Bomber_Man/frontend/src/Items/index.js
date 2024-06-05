@@ -10,8 +10,7 @@ import SpeedUp from "./SpeedUp";
 import Item from "./Item";
 import ExplodeAbleItem from "./ExplodeAbleItem";
 export default Item
-function getFire() {
-	return Fire
-}
 export { Grass, Stone, Brick, Bomb, Character, Fire, ExplodeAbleItem, BombPlus, FirePlus, SpeedUp, getFire }
-
+function getFire() {
+    return Fire
+}

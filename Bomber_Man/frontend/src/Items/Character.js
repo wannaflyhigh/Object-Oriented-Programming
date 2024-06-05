@@ -3,6 +3,7 @@ import ImageHandler from "../ImageHandler";
 import { imageKeys } from "../ImageHandler";
 import Bomb from "./Bomb";
 import Item from "./Item";
+import { IMAGE_HEIGHT, ITEM_WIDTH } from "../consts";
 
 export default class Character extends Item {
 	x;
@@ -82,7 +83,7 @@ export default class Character extends Item {
 		this.positionX = Math.round(this.x);
 		this.positionY = Math.round(this.y);
 
-		image(this.image, this.x * 100, this.y * 100);
+		image(this.image, this.x * ITEM_WIDTH, this.y * IMAGE_HEIGHT, ITEM_WIDTH, IMAGE_HEIGHT);
 	}
 
 	respawn() {

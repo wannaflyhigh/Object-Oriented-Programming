@@ -1,8 +1,16 @@
-const ITEM_WIDTH = 100, IMAGE_HEIGHT = 100
+let ITEM_WIDTH = window.innerWidth / 11, IMAGE_HEIGHT = window.innerWidth / 11
+console.log(ITEM_WIDTH)
+console.log(IMAGE_HEIGHT)
 const MILLISEC_TO_SEC = 1000
 const MAP_HEIGHT = 11, MAP_WIDTH = 11
 const FIRE_TIME = 0.8, BOMB_TIME = 3
 const SPEED_UP_RATE = 0.2, BOMB_ADD_RATE = 0.3, FIREPLUS_RATE = 0.3
-const SCALE_SIZE = 0.4
+const SCALE_SIZE = 1
 
-export { ITEM_WIDTH, IMAGE_HEIGHT, MILLISEC_TO_SEC, MAP_WIDTH, MAP_HEIGHT, FIRE_TIME, BOMB_TIME, SPEED_UP_RATE, BOMB_ADD_RATE, FIREPLUS_RATE, SCALE_SIZE }
+function getDynamicSizes() {
+    const sliceWidth = window.innerWidth / 11;
+    ITEM_WIDTH = sliceWidth,
+    IMAGE_HEIGHT= sliceWidth
+}
+
+export { getDynamicSizes ,ITEM_WIDTH, IMAGE_HEIGHT, MILLISEC_TO_SEC, MAP_WIDTH, MAP_HEIGHT, FIRE_TIME, BOMB_TIME, SPEED_UP_RATE, BOMB_ADD_RATE, FIREPLUS_RATE, SCALE_SIZE }

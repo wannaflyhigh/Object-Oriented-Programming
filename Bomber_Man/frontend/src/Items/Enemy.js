@@ -2,6 +2,7 @@ import BomberManMap from "../BomberManMap";
 import { imageKeys } from "../ImageHandler";
 import Item from "./Item";
 import ImageHandler from "../ImageHandler";
+import { IMAGE_HEIGHT, ITEM_WIDTH } from "../consts";
 
 export default class Enemy extends Item{
     moveInterval = 500;
@@ -62,7 +63,7 @@ export default class Enemy extends Item{
             this.moveTimer = 0;
         }
 
-        image(this.image, this.x * 100, this.y * 100);
+        image(this.image, this.x * ITEM_WIDTH, this.y * IMAGE_HEIGHT, ITEM_WIDTH, IMAGE_HEIGHT);
     }
 
     moveRandomly() {

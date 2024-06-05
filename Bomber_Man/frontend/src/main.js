@@ -8,9 +8,12 @@ import Fire from './Items/Fire';
 import { BombPlus, FirePlus, Grass, SpeedUp } from './Items';
 import { SCALE_SIZE } from './consts';
 import BombButton from './Buttons/BombButton';
+import { getDynamicSizes } from './consts';
 
 const bomberManMap = BomberManMap
 let character;
+
+let dynamicSizes;
 
 const enemies = [];
 const enemyPositions = [
@@ -30,7 +33,8 @@ sketch.preload = function () {
 }
 
 sketch.setup = function () {
-	createCanvas(600, 800);
+	const canvas = createCanvas(window.innerWidth, window.innerHeight);
+	canvas.parent('canvas-container');
 	frameRate(60);
 	pixelDensity(1)
 	ImageHandler.loadImages()
@@ -43,6 +47,13 @@ sketch.setup = function () {
 		const enemy = new Enemy(position.x, position.y);
 		enemies.push(enemy);
 	}
+
+	updateDynamicSizes();
+
+	window.addEventListener('resize', () => {
+		resizeCanvas(window.innerWidth, window.innerHeight);
+		updateDynamicSizes();
+	});
 }
 
 sketch.draw = function () {
@@ -154,6 +165,10 @@ function resetKeyStates() {
 	keyStates.down = false;
 	keyStates.left = false;
 	keyStates.right = false;
+}
+
+function updateDynamicSizes() {
+	dynamicSizes = getDynamicSizes();
 }
 
 window.keyPressed = keyPressed; // To ensure keyPressed can be accessed by p5.js
