@@ -14,12 +14,16 @@ class User(BaseModel):
     player_account: str
     player_password: str
 
+class CoinUpdate(BaseModel):
+    coin: int
+
 db_config = {
     'user': 'root',
     'password': 'a12345',
     'host': 'db',
     'database': 'bombman_db'
 }
+
 origins = [
     "http://127.0.0.1:8081",
     "http://localhost:8081",
@@ -40,8 +44,8 @@ async def register_user(user: User):
         conn = mysql.connector.connect(**db_config)
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO users (account, password) VALUES (%s, %s)",
-            (user.player_account, user.player_password)
+            "INSERT INTO users (account, password, coin) VALUES (%s, %s, %s)",
+            (user.player_account, user.player_password, 0)
         )
         conn.commit()
         cursor.close()
@@ -64,7 +68,7 @@ async def login_user(user: User, response: Response):
             (user.player_account, user.player_password)
         )
         result = cursor.fetchone()
-        cursor.close()  # 确保在查询结果后关闭游标
+        cursor.close()
         conn.close()
 
         if result:
@@ -84,6 +88,54 @@ async def user_info(player_account: Optional[str] = Cookie(None)):
     if not player_account:
         raise HTTPException(status_code=401, detail="User not logged in")
     return {"player_account": player_account}
+
+@app.get("/get-coin/")
+async def get_coin(player_account: Optional[str] = Cookie(None)):
+    if not player_account:
+        raise HTTPException(status_code=401, detail="User not logged in")
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT coin FROM users WHERE account = %s",
+            (player_account,)
+        )
+        result = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        if result:
+            return {"player_account": player_account, "coin": result[0]}
+        else:
+            raise HTTPException(status_code=404, detail="User not found")
+    except mysql.connector.Error as err:
+        logger.error(f"Error: {err}")
+        raise HTTPException(status_code=500, detail=f"Database error: {err}")
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {e}")
+
+@app.post("/update-coin/")
+async def update_coin(coin_update: CoinUpdate, player_account: Optional[str] = Cookie(None)):
+    if not player_account:
+        raise HTTPException(status_code=401, detail="User not logged in")
+    try:
+        conn = mysql.connector.connect(**db_config)
+        cursor = conn.cursor()
+        cursor.execute(
+            "UPDATE users SET coin = %s WHERE account = %s",
+            (coin_update.coin, player_account)
+        )
+        conn.commit()
+        cursor.close()
+        conn.close()
+        return {"message": "Coin updated successfully"}
+    except mysql.connector.Error as err:
+        logger.error(f"Error: {err}")
+        raise HTTPException(status_code=500, detail=f"Database error: {err}")
+    except Exception as e:
+        logger.error(f"Unexpected error: {e}")
+        raise HTTPException(status_code=500, detail=f"Unexpected error: {e}")
 
 if __name__ == "__main__":
     import uvicorn
