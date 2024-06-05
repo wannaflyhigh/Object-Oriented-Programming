@@ -35,6 +35,10 @@ class BomberManMap {
 	}
 
 	updateItem(x, y, newItem) {
+		const curItem = this.items.get(`${x},${y}`)
+		if (curItem instanceof Fire) {
+			curItem.resetFire()
+		}
 		this.items.delete(`${x},${y}`)
 		this.items.set(`${x},${y}`, newItem)
 	}
