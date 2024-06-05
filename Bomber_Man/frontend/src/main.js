@@ -30,7 +30,7 @@ sketch.preload = function () {
 }
 
 sketch.setup = function () {
-	createCanvas(600, 600);
+	createCanvas(600, 800);
 	frameRate(60);
 	pixelDensity(1)
 	ImageHandler.loadImages()
@@ -113,17 +113,10 @@ sketch.draw = function () {
 }
 
 sketch.mousePressed = function () {
-	console.log('here');
-	console.log({ mouseX, mouseY });
-	// NOTE: full screen while playing?
-	
-	if (!fs && mouseX > 4000 && mouseX < 7000  && mouseY >  4000 && mouseY < 6000 ) {
-		fullscreen(!fs);
-		fs = true;
-		bomberManMap.removeItem(fullscreenButtonX, fullscreenButtonY);
-	}
+	// console.log('here');
+	// console.log({ mouseX, mouseY });
+	BombButton.touchPending(mouseX, mouseY, () => { character.layBomb() })
 
-	
 }
 
 function keyPressed() {
