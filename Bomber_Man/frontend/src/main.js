@@ -113,9 +113,17 @@ sketch.draw = function () {
 }
 
 sketch.mousePressed = function () {
-	// console.log('here');
-	// console.log({ mouseX, mouseY });
-	BombButton.touchPending(mouseX, mouseY, () => { character.layBomb() })
+	console.log('here');
+	console.log({ mouseX, mouseY });
+	// NOTE: full screen while playing?
+	
+	if (!fs && mouseX > 4000 && mouseX < 7000  && mouseY >  4000 && mouseY < 6000 ) {
+		fullscreen(!fs);
+		fs = true;
+		bomberManMap.removeItem(fullscreenButtonX, fullscreenButtonY);
+	}
+
+	
 }
 
 function keyPressed() {

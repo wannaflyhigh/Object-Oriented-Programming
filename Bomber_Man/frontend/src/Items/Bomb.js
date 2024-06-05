@@ -49,6 +49,7 @@ export default class Bomb extends ExplodeAbleItem {
 	expandFire(curItem) {
 		if (!curItem) return false
 		if (!curItem.isExplodeAble) return false
+
 		const isBrick = curItem.explode()
 		if (isBrick) return false
 		return true

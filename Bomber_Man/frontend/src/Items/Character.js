@@ -99,11 +99,13 @@ export default class Character extends Item {
 
 
 	layBomb() {
-        if (this.activeBombs.length < this.bombNum) {
-            const newBomb = new Bomb(this.positionX, this.positionY, this.fireRange, this);
-            BomberManMap.updateItem(this.positionX, this.positionY, newBomb);
-            this.activeBombs.push(newBomb);
-        }
+		if(this.isDead == false){
+			if (this.activeBombs.length < this.bombNum) {
+				const newBomb = new Bomb(this.positionX, this.positionY, this.fireRange, this);
+				BomberManMap.updateItem(this.positionX, this.positionY, newBomb);
+				this.activeBombs.push(newBomb);
+			}
+		}
     }
 
 	removeBomb(bomb) {
