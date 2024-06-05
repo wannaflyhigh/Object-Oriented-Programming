@@ -3,15 +3,18 @@ import { imageKeys } from "../ImageHandler";
 import { BOMB_TIME, MILLISEC_TO_SEC } from "../consts";
 import ExplodeAbleItem from "./ExplodeAbleItem";
 import Fire from "./Fire";
+import Character from "./Character";
 
 export default class Bomb extends ExplodeAbleItem {
 	fireRange = 1
 	timeoutID
-	constructor(x, y, fireRange) {
+	character
+	constructor(x, y, fireRange, character) {
 		super(imageKeys.BOMB)
 		this.x = x
 		this.y = y
 		this.fireRange = fireRange
+		this.character = character
 		this.timeoutID = setTimeout(() => {
 			this.explode()
 		}, BOMB_TIME * MILLISEC_TO_SEC)
@@ -40,6 +43,7 @@ export default class Bomb extends ExplodeAbleItem {
 			const keepExpand = this.expandFire(curItem)
 			if (!keepExpand) break
 		}
+		this.character.removeBomb(this);
 	}
 
 	expandFire(curItem) {
