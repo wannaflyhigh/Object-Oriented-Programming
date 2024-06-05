@@ -127,33 +127,41 @@ sketch.draw = function () {
 	}
 
 	character.move(dx, dy);
-}
+	
+	for (let i = 0; i < touches.length; i++) {
+		const touchX = touches[i].x, touchY = touches[i].y
+		ellipse(touchX, touchY, 50, 50);
+		BombButton.touchPending(touchX, touchY, () => { character.layBomb() })
+		UpButton.touchPending(touchX, touchY, () => {
+			resetKeyStates();
+			keyStates.up = true;
+		})
+		DownButton.touchPending(touchX, touchY, () => {
+			resetKeyStates();
+			keyStates.down = true;
+		})
+		RightButton.touchPending(touchX, touchY, () => {
+			resetKeyStates();
+			keyStates.right = true;
+		})
+		LeftButton.touchPending(touchX, touchY, () => {
+			resetKeyStates();
+			keyStates.left = true;
+		})
+	}
+	if (touches.length == 0)
+		resetKeyStates()
+}// draw
 
-sketch.mousePressed = function () {
-	// console.log('here');
-	console.log({ mouseX, mouseY });
-	BombButton.touchPending(mouseX, mouseY, () => { character.layBomb() })
-	UpButton.touchPending(mouseX, mouseY, () => {
-		resetKeyStates();
-		keyStates.up = true;
-	})
-	DownButton.touchPending(mouseX, mouseY, () => {
-		resetKeyStates();
-		keyStates.down = true;
-	})
-	RightButton.touchPending(mouseX, mouseY, () => {
-		resetKeyStates();
-		keyStates.right = true;
-	})
-	LeftButton.touchPending(mouseX, mouseY, () => {
-		resetKeyStates();
-		keyStates.left = true;
-	})
+// do this prevent default touch interaction
+function mousePressed() {
+	return false;
 }
+sketch.mousePressed = mousePressed
 
-sketch.mouseReleased = (() => {
-	resetKeyStates()
-})
+document.addEventListener('gesturestart', function (e) {
+	e.preventDefault();
+});
 
 function keyPressed() {
 	if (key === 'w') {
