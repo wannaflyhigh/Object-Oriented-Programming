@@ -55,6 +55,7 @@ sketch.draw = function () {
 	bomberManMap.display()
 
 	if(!fs){
+		image(fullscreenButton.image, )
 		bomberManMap.updateItem(fsbuttonX,fsbuttonY,new FSbutton(fsbuttonX, fsbuttonY))
 	}
 
@@ -127,13 +128,11 @@ sketch.mousePressed = function () {
 	console.log({ mouseX, mouseY });
 	// NOTE: full screen while playing?
 	
-	if (!fs && mouseX > 4000 && mouseX < 7000  && mouseY >  4000 && mouseY < 6000 ) {
+	if (!fs && mouseX > 160 && mouseX < 280 && mouseY > 160 && mouseY < 240) {
 		fullscreen(!fs);
 		fs = true;
-		bomberManMap.removeItem(fullscreenButtonX, fullscreenButtonY);
+		bomberManMap.removeButton(fullscreenButtonX, fullscreenButtonY);
 	}
-
-	
 }
 
 function keyPressed() {

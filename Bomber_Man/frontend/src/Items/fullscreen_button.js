@@ -3,8 +3,8 @@ import ExplodeAbleItem from "./ExplodeAbleItem";
 
 export default class FSbutton extends ExplodeAbleItem {
 	constructor(x, y) {
-		super(imageKeys.FULLSCREEN_BUTTON)
 		this.x = x
 		this.y = y
+        this.img = ImageHandler.loadedImages[imageKeys.FULLSCREEN_BUTTON];
 	}
 }
