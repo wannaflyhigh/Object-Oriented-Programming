@@ -5,29 +5,19 @@ class ImageHandler {
 	loadedImages = []
 
 	loadImages() {
-		this.loadedImages[imageKeys.GRASS] = this.loadAndResizeImage('../images/grass.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.STONE] = this.loadAndResizeImage('../images/stone.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.CHARACTER] = this.loadAndResizeImage('../images/character.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.BRICK] = this.loadAndResizeImage('../images/brick.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.BOMB] = this.loadAndResizeImage('../images/bomb.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.FIRE] = this.loadAndResizeImage('../images/fire.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.DEAD_CHARACTER] = this.loadAndResizeImage('../images/character2.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.FIREPLUS] = this.loadAndResizeImage('../images/fireplus.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.BOMBPLUS] = this.loadAndResizeImage('../images/bombplus.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.SPEEDUP] = this.loadAndResizeImage('../images/speedup.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.ENEMY] = this.loadAndResizeImage('../images/character4.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.DEAD_ENEMY] = this.loadAndResizeImage('../images/character3.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.BOMB_BUTTON] = this.loadAndResizeImage('../images/bombbutton.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.UP] = this.loadAndResizeImage('../images/up.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.DOWN] = this.loadAndResizeImage('../images/down.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.RIGHT] = this.loadAndResizeImage('../images/right.png', ITEM_WIDTH, ITEM_HEIGHT);
-		this.loadedImages[imageKeys.LEFT] = this.loadAndResizeImage('../images/left.png', ITEM_WIDTH, ITEM_HEIGHT);
+		this.loadedImages = this.imagePaths.map(imgPath => {
+			return this.loadAndResizeImage(imgPath, ITEM_WIDTH, ITEM_HEIGHT);
+		})
 	}
 
 	loadAndResizeImage(imgPath, targetWidth, targetHeight) {
 		const img = loadImage(imgPath);
 		img.resize(targetWidth, targetHeight);
 		return img;
+	}
+
+	getLoadedImage(imageKey) {
+		return this.loadedImages[imageKey]
 	}
 }
 

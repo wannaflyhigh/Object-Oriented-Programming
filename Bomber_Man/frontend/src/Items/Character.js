@@ -34,7 +34,7 @@ export default class Character extends Item {
 
 	updateImage() {
 		if (this.isDead) {
-			this.image = ImageHandler.loadedImages[imageKeys.DEAD_CHARACTER];
+			this.image = ImageHandler.getLoadedImage(imageKeys.DEAD_CHARACTER);
 		}
 	}
 
@@ -95,7 +95,7 @@ export default class Character extends Item {
 		this.targetY = this.y;
 		this.positionX = 1;
 		this.positionY = 1;
-		this.image = ImageHandler.loadedImages[imageKeys.CHARACTER];
+		this.image = ImageHandler.getLoadedImage(imageKeys.CHARACTER);
 	}
 
 

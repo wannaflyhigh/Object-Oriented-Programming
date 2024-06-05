@@ -48,7 +48,7 @@ export default class Enemy extends Item {
 			} else if (millis() - this.deathTime > 800) {
 				return;
 			}
-			this.image = ImageHandler.loadedImages[imageKeys.DEAD_ENEMY];
+			this.image = ImageHandler.getLoadedImage(imageKeys.DEAD_ENEMY);
 		}
 
 		this.x = Math.max(1, Math.min(this.x, 9));
